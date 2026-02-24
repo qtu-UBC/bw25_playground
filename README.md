@@ -1,92 +1,147 @@
 # bw25_playground
 
-A brightway 2.5 project for automated LCA supply chain graph generation.
+A Brightway 2.5 playground for **model-level** LCA calculation and **supply chain graph generation** from a structured Excel foreground model.
 
-## Stack
+This repo is set up to:
+- parse a foreground model from `input/lci-carbon-fiber.xlsx`
+- build a **foreground database** (`my_db`)
+- build an **external inputs database** (`external_inputs`) for any foreground inputs that don’t match the foreground set (and/or can’t be matched to ecoinvent)
+- (optionally) match technosphere inputs to **ecoinvent 3.10.1 cut-off**
+- run LCIA for a single **model root** (functional unit) and generate a readable **model-level** HTML graph per impact method.
 
-- Python >= 3.11, managed with `uv`
-- brightway 2.5: `bw2data>=4`, `bw2calc>=2`, `bw2io>=0.9`
-- Visualization: `networkx`, `pyvis`, `plotly`, `matplotlib`
+> **Important (license):** do **not** commit ecoinvent datasets to GitHub. This repo ignores `data/`, `*.spold`, and ecoinvent folders via `.gitignore`.
 
-## How to run
+---
+
+## Requirements
+
+- Python **3.11+**
+- [`uv`](https://github.com/astral-sh/uv) for env + dependency management
+- A local copy of **ecoinvent 3.10.1 cut-off ecospold2** (optional, licensed)
+
+---
+
+## Repo layout
+
+- `input/lci-carbon-fiber.xlsx` – foreground model (Activity blocks + Exchanges tables)
+- `input/methods.csv` – LCIA methods to run (must match installed Brightway method keys exactly)
+- `main.py` – end-to-end pipeline (import → match → LCIA → model-level graph)
+- `output/graphs/` – generated HTML graphs (ignored by git)
+- `data/` – local datasets (ecoinvent etc.) (**ignored by git**)
+
+---
+
+## First-time setup
+
+```bash
+uv sync
+```
+
+### Configure ecoinvent (optional, recommended)
+
+Create a `.env` file (repo root) and set the ecospold directory path:
+
+```bash
+cat > .env <<'EOF'
+ECOINVENT_ECOSPOlD_DIR=/Users/qtu-ubc/Documents/bw25_playground/data/ecoinvent 3.10.1_cutoff_ecoSpold02/datasets
+EOF
+```
+
+- The path must point to a directory containing many `*.spold` files (recursively is OK).
+- `.env` is ignored by git.
+
+If ecoinvent is not configured, the script will still run, but unmatched inputs will be stubbed into `external_inputs`.
+
+---
+
+## Run
 
 ```bash
 uv run python main.py
 ```
 
-This will:
-1. Set up a brightway project and install `biosphere3` + LCIA methods (first run only, ~1 min)
-2. Import activities and exchanges from `input/` CSVs
-3. Run LCA for each activity × each impact method
-4. Save graphs to `output/graphs/`
+On the first run in a fresh Brightway project, it will ensure:
+- `biosphere3` exists
+- LCIA methods are installed (you should see hundreds of methods)
 
-## Folder structure
+Then it will:
+1) check/import ecoinvent (if configured and not already installed)
+2) parse the Excel model into foreground + external inputs
+3) write databases
+4) select the **model root** and run LCIA
+5) write HTML graphs into `output/graphs/`
 
+---
+
+## Model root (functional unit)
+
+The “model root” is the process used as the functional unit anchor for the whole model graph + LCIA.
+
+This repo supports selecting the root by:
+- **activity name** (process name), or
+- **reference product** (recommended if the process name is long)
+
+Example: reference product `"carbon fiber, weaved"`.
+
+If you change the Excel, keep the root selector consistent.
+
+---
+
+## Outputs
+
+- `output/graphs/<root>__<method>__graph.html`
+
+Graphs use a hierarchical left-to-right layout and show edge amounts on hover to avoid clutter.
+
+---
+
+## Git hygiene (important)
+
+### Do not commit ecoinvent
+
+This repo’s `.gitignore` already includes:
+
+- `data/`
+- `**/*.spold`
+- `**/ecoinvent*/`
+
+If you accidentally pushed ecoinvent once, you must **rewrite history** (ignore rules don’t remove already-pushed blobs). Recommended:
+
+```bash
+brew install git-filter-repo
+git filter-repo --path "data/ecoinvent 3.10.1_cutoff_ecoSpold02" --invert-paths
+git push --force --all
+git push --force --tags
 ```
-bw25_playground/
-├── main.py                  # Entry point — run this
-├── pyproject.toml           # uv dependencies
-├── README.md                # This file
-├── uv.lock
-├── tutorials/               # Reference Jupyter notebooks
-├── input/
-│   ├── activities.csv       # Activities to model (code, name, location, unit, database, category)
-│   ├── exchanges.csv        # Technosphere + biosphere exchanges between activities
-│   └── methods.csv          # LCIA impact methods to calculate
-└── output/
-    └── graphs/              # All generated graphs saved here
-        ├── *.html           # Interactive PyVis supply chain graphs
-        ├── *sankey*.html    # Plotly Sankey diagrams
-        └── *bar*.png        # Matplotlib contribution bar charts
+
+---
+
+## Troubleshooting
+
+### “No valid methods found”
+Your `input/methods.csv` entries must match installed Brightway method keys **exactly**.
+List installed methods:
+
+```bash
+uv run python - <<'PY'
+import bw2data as bd
+bd.projects.set_current("bw25_playground")
+print(len(bd.methods))
+for m in list(bd.methods)[:50]:
+    print(m)
+PY
 ```
 
-## CSV schemas
+### PyVis template / rendering errors
+Install Jinja2 and ensure HTML export uses `write_html` (not notebook mode):
 
-### activities.csv
-| column | description |
-|--------|-------------|
-| code | unique identifier (no spaces) |
-| name | human-readable name |
-| location | ISO country code or region |
-| unit | functional unit (kg, kWh, m3, etc.) |
-| database | must match DATABASE_NAME in main.py |
-| category | optional label (manufacturing, energy, etc.) |
+```bash
+uv pip install jinja2
+```
 
-### exchanges.csv
-| column | description |
-|--------|-------------|
-| input_code | code of the supplying activity |
-| input_database | database of the supplying activity (`my_db` or `biosphere3`) |
-| output_code | code of the receiving activity |
-| output_database | database of the receiving activity |
-| amount | exchange amount (float) |
-| type | `technosphere`, `biosphere`, or `production` |
-| unit | unit of the exchange |
-| comment | optional description |
+---
 
-### methods.csv
-| column | description |
-|--------|-------------|
-| method_tuple | Python tuple string, e.g. `('IPCC 2021', 'climate change', 'GWP 100a')` |
-| description | human-readable label |
+## Notes
 
-## Cowork instructions
-
-- Always run scripts with `uv run python <script.py>` — never `python` directly
-- Input CSVs are in `input/` — edit these to change what gets modelled
-- Output graphs go to `output/graphs/` — open `.html` files in a browser
-- The brightway project is named `bw25_playground` and stored locally by brightway
-- To re-import the database after editing CSVs, delete the database first:
-  ```python
-  import bw2data as bd
-  bd.projects.set_current("bw25_playground")
-  del bd.databases["my_db"]
-  ```
-- `bw_graph_tools` is used for traversal if installed; falls back to `bw2analyzer`
-- Graph cutoff and max depth are set at the top of `main.py`
-
-## Key brightway 2.5 notes
-
-- `brightway2` meta-package is NOT used — individual packages are listed directly
-- `biosphere3` elementary flows are required for any biosphere exchanges
-- LCIA methods must match exactly — check available methods with `list(bd.methods)` in a Python shell
+- ecoinvent regionalization/geocollections warnings can be ignored unless you are doing regionalized LCIA.
+- If you modify the Excel schema (column names / block structure), update the parser accordingly.
