@@ -71,19 +71,6 @@ Then it will:
 4) select the **model root** and run LCIA
 5) write HTML graphs into `output/graphs/`
 
----
-
-## Model root (functional unit)
-
-The “model root” is the process used as the functional unit anchor for the whole model graph + LCIA.
-
-This repo supports selecting the root by:
-- **activity name** (process name), or
-- **reference product** (recommended if the process name is long)
-
-Example: reference product `"carbon fiber, weaved"`.
-
-If you change the Excel, keep the root selector consistent.
 
 ---
 
