@@ -1,0 +1,522 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.EcoInvent.org/EcoSpold02 ../../schemas/datasets/EcoSpold02.xsd http://www.EcoInvent.org/UsedUserMasterData ../../schemas/datasets/EcoSpold02UserMasterData.xsd">
+  <childActivityDataset>
+    <activityDescription>
+      <activity specialActivityType="0" id="c6424257-6f5c-5bd6-b9bb-a657c0f66fbf" activityNameId="f7f7f31c-cf7f-4d1e-a6de-9ca260f8b8e4" parentActivityId="bbb58f99-573d-4265-86eb-bfc3defa7c79" inheritanceDepth="-1" type="1">
+        <activityName xml:lang="en">abrasive blasting, alumina, carbon steel substrate</activityName>
+        <includedActivitiesStart xml:lang="en">The activity is a service and it starts with the workpiece placed in the abrasive blasting machine.The activity referes to the amount of time the workpiece is treated, without considering any impact realated to the other production steps of the workpiece.The carbon steel substrate is not included in the activity exchanges. </includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">The activity is a service and it ends with the workpiece at the exit of the abrasive blasting machine.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="0">This activity provides the service of 1 square metre of abrasive blasting. The abrasive blasting is a process which uses compressed air to carry an abrasive agent towards the surface of the workpiece. This dataset uses alumina powder as abrasive agent. When the abrasive agent hits the surface, the dirt, the rust, and particles of the base metal gets removed. This process is modelled for a machine with a  working volume of 591x815x560 [mm]. The machine is operated manually. This dataset represent a GLO average because it is a well-established technique in the industry</text>
+          <text xml:lang="en" index="1">The dataset includes the amount of substrate lost due to the abrasive action of the operation. The amount is expressed via the exchange of "steel, low-alloyed". The dataset doesn't include the workpiece, and doesn't include the construction and maintenance of the abrasive blasting machine.</text>
+          <text xml:lang="en" index="2">Considering the specificity of the activity, this activity should be used only for the preparation of the workpieces for thermal spray coating.</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="873e2688-4fb3-4acb-bfaf-1b99b3dca83d">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">2592:Treatment and coating of metals; machining</classificationValue>
+      </classification>
+      <geography geographyId="34dbbff8-88ce-11de-ad60-0019e336be3a">
+        <shortname xml:lang="en">GLO</shortname>
+        <comment>
+          <text xml:lang="en" index="0">The data are based on estimations and do not have a specific geographical origin. They are assumed to be representative of this geography.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="2">
+        <comment>
+          <text xml:lang="en" index="0">The machine is manually operated, and it provides a working volume of 591x815x560 [mm]. The abrasive considered for this activity is alumina powder. Considering the specificity of the activity, this activity should be used only for the preparation of the workpieces for thermal spray coating.</text>
+          <text xml:lang="en" index="1">The machine uses compressed air with a gauge pressure of 550 kPa. This dataset is considered to be valid for a carbon steel substrate.</text>
+          <text xml:lang="en" index="2">The alumina is considered to be reused. The calculation is based on the condition of the pilot plant: 100g of alumina reused for 100 50x20mm specimens.</text>
+        </comment>
+      </technology>
+      <timePeriod startDate="2022-01-01" endDate="2023-12-31" isDataValidForEntirePeriod="true">
+        <comment>
+          <text xml:lang="en" index="0">Data were taken from a pilot-scale plant.The data collection was performed in 2022.</text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="7ca94a15-2908-512f-9c71-1e1b1e69d93a" unitId="1017f68a-f818-4f9d-a34d-a31e7386f628" variableName="RP" amount="1.0" intermediateExchangeId="8a8418c4-a67f-48de-a2bd-5045bb89e3df" productionVolumeAmount="4.0" productionVolumeVariableName="pv_rp" productionVolumeMathematicalRelation="">
+        <name xml:lang="en">abrasive blasting, alumina, carbon steel substrate</name>
+        <unitName xml:lang="en">m2</unitName>
+        <comment xml:lang="en">The exchange referes to 1 hour of abrasive blasting.</comment>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="13.49" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Price calculated based on direct measure in 2022 of the consumption of the University of Barcelona plant and on costs of the inputs. Price shall be reconsidered depending on application, e.g. different region, full scale application, etc. 
+The price was converted to EUR based on the annual exchange rates published by the European Central Bank (https://sdw.ecb.europa.eu/quickview.do?SERIES_KEY=120.EXR.A.USD.EUR.SP00.A, last accessed on 2022-02-15) and adjusted for inflation relative to 2005 using the producer price index (PPI) of the euro area, published by eurostat (https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=sts_inpp_a&amp;lang=en, last accessed on 2022-05-04).																	
+</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">This is a placeholder value that does not reflect real-world production volumes. This dataset does not currently require a real-world production volume to work in the database framework, and no actual data were collected yet. This has no negative effect on the results of the ecoinvent database.</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="d7903b5a-1550-4435-bf3c-cadf5755e2f6">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">44216: Machine-tools for deburring, sharpening, grinding, honing, lapping, polishing or otherwise finishing metal, si[…]</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="f5dee765-ab08-5fb8-94b3-296f21eea9ec" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="1344-28-1" amount="0.8552129354630829" intermediateExchangeId="96f36f31-8f6a-48f8-921f-1d781b7a545f" activityLinkId="62f7dd4e-4e36-577a-9f71-e4d680ba6a9e">
+        <name xml:lang="en">aluminium oxide, non-metallurgical</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Proxy used to model alumina powder for abrasive blasting. The amount of alumina is calculated considering its reuse. The amount is calculated from 100g of alumina reused for 100 specimens of 50x20mm dimension. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.8552129354630829" mu="-0.15640479372727079" variance="0.006" varianceWithPedigreeUncertainty="0.008225000000000001"/>
+          <pedigreeMatrix reliability="1" completeness="4" temporalCorrelation="2" geographicalCorrelation="2" furtherTechnologyCorrelation="1"/>
+          <comment xml:lang="en">Variance value taken from Tab 10.3 of "Overview and methodology. Data quality guideline for the ecoinvent database version 3"  Ecoinvent Report 1(v3), Weidema B P, Bauer C, Hischier R, Mutel C, Nemecek T, Reinhard J, Vadenbo C O, Wernet G. (2013). </comment>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Al2O3</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Al2O3</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0b7946e8-7395-49e5-b9b2-730edabae135">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">41432: Alumina (aluminium oxide), except artificial corundum</classificationValue>
+        </classification>
+        <classification classificationId="37185bb6-ef91-5c55-b7bd-6ef0fa7f49d7">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">2818: Aluminium oxide (including artificial corundum); aluminium hydroxide</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4b91d05e-b2c5-5027-a644-a2198b77ac9a" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="1344-28-1" amount="0.14478706453691711" intermediateExchangeId="96f36f31-8f6a-48f8-921f-1d781b7a545f" activityLinkId="95e99c23-28a8-5675-ac2b-10cf5e7a2f39">
+        <name xml:lang="en">aluminium oxide, non-metallurgical</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Proxy used to model alumina powder for abrasive blasting. The amount of alumina is calculated considering its reuse. The amount is calculated from 100g of alumina reused for 100 specimens of 50x20mm dimension. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.14478706453691711" mu="-1.9324911363295623" variance="0.006" varianceWithPedigreeUncertainty="0.008225000000000001"/>
+          <pedigreeMatrix reliability="1" completeness="4" temporalCorrelation="2" geographicalCorrelation="2" furtherTechnologyCorrelation="1"/>
+          <comment xml:lang="en">Variance value taken from Tab 10.3 of "Overview and methodology. Data quality guideline for the ecoinvent database version 3"  Ecoinvent Report 1(v3), Weidema B P, Bauer C, Hischier R, Mutel C, Nemecek T, Reinhard J, Vadenbo C O, Wernet G. (2013). </comment>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Al2O3</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Al2O3</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0b7946e8-7395-49e5-b9b2-730edabae135">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">41432: Alumina (aluminium oxide), except artificial corundum</classificationValue>
+        </classification>
+        <classification classificationId="37185bb6-ef91-5c55-b7bd-6ef0fa7f49d7">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">2818: Aluminium oxide (including artificial corundum); aluminium hydroxide</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="bcda597c-edf9-5237-9259-4cbe500925f5" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="81.73882496936471" intermediateExchangeId="58c5a1af-21fa-4cd1-a7a2-a63f454b411e" activityLinkId="0943f768-6230-56bf-b428-446272f3d857">
+        <name xml:lang="en">compressed air, 600 kPa gauge</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">Gauge pressure taken from datassheet of the machine</comment>
+        <uncertainty>
+          <lognormal meanValue="81.73882496936471" mu="4.403529102810941" variance="0.0006" varianceWithPedigreeUncertainty="0.002825"/>
+          <pedigreeMatrix reliability="1" completeness="4" temporalCorrelation="2" geographicalCorrelation="2" furtherTechnologyCorrelation="1"/>
+          <comment xml:lang="en">Variance value taken from Tab 10.3 of "Overview and methodology. Data quality guideline for the ecoinvent database version 3"  Ecoinvent Report 1(v3), Weidema B P, Bauer C, Hischier R, Mutel C, Nemecek T, Reinhard J, Vadenbo C O, Wernet G. (2013). </comment>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="3ef02be0-71b9-4ab7-ad11-1e8a9f48af55">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34250: Salts of oxometallic or peroxometallic acids; colloidal precious metals and compounds thereof; inorganic and o[…]</classificationValue>
+        </classification>
+        <classification classificationId="fab430a0-805d-5ab2-a64d-1c5521dfd8f0">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">285390: Phosphides, chemically defined or not, not ferrophosphorus; other inorganic compounds n.e.c. (including dis[...]</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="2701ce7a-75d6-51a5-a9db-d58a861cc9ac" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="33.26117503063527" intermediateExchangeId="58c5a1af-21fa-4cd1-a7a2-a63f454b411e" activityLinkId="f08c0966-3ad0-592a-9cff-78094f24dbbd">
+        <name xml:lang="en">compressed air, 600 kPa gauge</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">Gauge pressure taken from datassheet of the machine</comment>
+        <uncertainty>
+          <lognormal meanValue="33.26117503063527" mu="3.5043908017828107" variance="0.0006" varianceWithPedigreeUncertainty="0.002825"/>
+          <pedigreeMatrix reliability="1" completeness="4" temporalCorrelation="2" geographicalCorrelation="2" furtherTechnologyCorrelation="1"/>
+          <comment xml:lang="en">Variance value taken from Tab 10.3 of "Overview and methodology. Data quality guideline for the ecoinvent database version 3"  Ecoinvent Report 1(v3), Weidema B P, Bauer C, Hischier R, Mutel C, Nemecek T, Reinhard J, Vadenbo C O, Wernet G. (2013). </comment>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="3ef02be0-71b9-4ab7-ad11-1e8a9f48af55">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34250: Salts of oxometallic or peroxometallic acids; colloidal precious metals and compounds thereof; inorganic and o[…]</classificationValue>
+        </classification>
+        <classification classificationId="fab430a0-805d-5ab2-a64d-1c5521dfd8f0">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">285390: Phosphides, chemically defined or not, not ferrophosphorus; other inorganic compounds n.e.c. (including dis[...]</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="00e8be58-150a-5746-9a8a-5ef7a658c687" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="14.667" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="2a362a40-b1c0-591a-8bb3-b9d6ab94a192">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">The electricity is considered to be medium voltage for the use in industry.</comment>
+        <uncertainty>
+          <lognormal meanValue="14.667" mu="2.6856000722646183" variance="0.0006" varianceWithPedigreeUncertainty="0.002825"/>
+          <pedigreeMatrix reliability="1" completeness="4" temporalCorrelation="2" geographicalCorrelation="2" furtherTechnologyCorrelation="1"/>
+          <comment xml:lang="en">Variance value taken from Tab 10.3 of "Overview and methodology. Data quality guideline for the ecoinvent database version 3"  Ecoinvent Report 1(v3), Weidema B P, Bauer C, Hischier R, Mutel C, Nemecek T, Reinhard J, Vadenbo C O, Wernet G. (2013). </comment>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="335989b2-2bab-5cfc-b7f9-53a06044eb51" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="-0.7867892452016145" isCalculatedAmount="true" mathematicalRelation="alumina+ steel_removed" intermediateExchangeId="3a91cb7d-843b-495d-9973-33ba5efee877" activityLinkId="440a11fc-6ddd-5e96-a487-9cd9216b52ec" productionVolumeVariableName="pv_iw" productionVolumeMathematicalRelation="iw*pv_rp/abs(RP)">
+        <name xml:lang="en">inert waste</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">The exchange includes the amount of alumina used and the amount of steel lost from the substrate</comment>
+        <uncertainty>
+          <lognormal meanValue="0.7867892452016145" mu="-0.23979486159774907" variance="0.0006" varianceWithPedigreeUncertainty="0.0026249999999999997"/>
+          <pedigreeMatrix reliability="1" completeness="4" temporalCorrelation="1" geographicalCorrelation="2" furtherTechnologyCorrelation="1"/>
+          <comment xml:lang="en">Variance value taken from Tab 10.3 of "Overview and methodology. Data quality guideline for the ecoinvent database version 3"  Ecoinvent Report 1(v3), Weidema B P, Bauer C, Hischier R, Mutel C, Nemecek T, Reinhard J, Vadenbo C O, Wernet G. (2013). </comment>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <productionVolumeComment xml:lang="en">Production volume calculated based on the production volume of the reference product.</productionVolumeComment>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <classification classificationId="5f29a8d8-03d5-430d-b504-5bc91545a88b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39990: Other wastes n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a2261ff0-eb56-5733-a77d-fc8459101854" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="-0.22321075479838545" isCalculatedAmount="true" mathematicalRelation="alumina+ steel_removed" intermediateExchangeId="3a91cb7d-843b-495d-9973-33ba5efee877" activityLinkId="6565825f-6bc2-5dbd-b92e-f8f161473a24" productionVolumeVariableName="pv_iw" productionVolumeMathematicalRelation="iw*pv_rp/abs(RP)">
+        <name xml:lang="en">inert waste</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">The exchange includes the amount of alumina used and the amount of steel lost from the substrate</comment>
+        <uncertainty>
+          <lognormal meanValue="0.22321075479838545" mu="-1.4996388650552408" variance="0.0006" varianceWithPedigreeUncertainty="0.0026249999999999997"/>
+          <pedigreeMatrix reliability="1" completeness="4" temporalCorrelation="1" geographicalCorrelation="2" furtherTechnologyCorrelation="1"/>
+          <comment xml:lang="en">Variance value taken from Tab 10.3 of "Overview and methodology. Data quality guideline for the ecoinvent database version 3"  Ecoinvent Report 1(v3), Weidema B P, Bauer C, Hischier R, Mutel C, Nemecek T, Reinhard J, Vadenbo C O, Wernet G. (2013). </comment>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <productionVolumeComment xml:lang="en">Production volume calculated based on the production volume of the reference product.</productionVolumeComment>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <classification classificationId="5f29a8d8-03d5-430d-b504-5bc91545a88b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39990: Other wastes n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="9355b580-6cfa-5a33-a63d-40df3672c1e1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="steel_removed" amount="0.01" intermediateExchangeId="817c3650-4fed-4ef2-b9b6-404a198834e6" activityLinkId="cb4b1153-8a96-5358-821e-4b535b715ee6">
+        <name xml:lang="en">steel, low-alloyed</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">The exchange refers to the amount of steel lost during the abrasive blasting.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.01" mu="-4.605170185988091" variance="0.0006" varianceWithPedigreeUncertainty="0.002825"/>
+          <pedigreeMatrix reliability="1" completeness="4" temporalCorrelation="2" geographicalCorrelation="2" furtherTechnologyCorrelation="1"/>
+          <comment xml:lang="en">Variance value taken from Tab 10.3 of "Overview and methodology. Data quality guideline for the ecoinvent database version 3"  Ecoinvent Report 1(v3), Weidema B P, Bauer C, Hischier R, Mutel C, Nemecek T, Reinhard J, Vadenbo C O, Wernet G. (2013). </comment>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.005" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.005" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.005" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="0.0" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Non combustible products are assumed to have an LHV equal to zero (0).</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="012af131-55e8-448d-a147-251ce352304e">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">41122: Alloy steel in ingots or other primary forms and semi-finished products of alloy steel</classificationValue>
+        </classification>
+        <classification classificationId="2aced0e5-0442-547c-81ab-cdf3e56c8dfb">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">7218: Stainless steel in ingots or other primary forms; semi-finished products of stainless steel</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">The sampling of the data was performed on a speciment with dimension 50x20 [mm]. The time span of the blasting during the data collection was of 25 seconds. The results were scaled for the development of the dataset. 
+</samplingProcedure>
+        <extrapolations xml:lang="en">The values in the dataset were linearly extrapolated from the measurements performed on site.</extrapolations>
+      </representativeness>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="38" reviewerId="e049b5f5-4742-4486-add7-d5fc2bf19c4d" reviewerName="Louis Brimacombe" reviewerEmail="louis.brimacombe@gmail.com" reviewDate="2023-05-23">
+        <otherDetails xml:lang="en"/>
+      </review>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="38" reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2023-09-04">
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'carbon content, fossil':
+ - Input='5E-05', Output='0'
+ - Input &gt; output by 5E-05 kg
+
+Property 'price':
+ - Input='0', Output='13.49'
+ - Input &lt; output by 13.49 EUR2005 (100% of output)
+
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): wet mass=1, water in wet mass=0, water content=0, carbon content, fossil=0, carbon content, non-fossil=0, dry mass=1
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): wet mass=1, water in wet mass=0, water content=0, carbon content, fossil=0, carbon content, non-fossil=0, dry mass=1
+
+</otherDetails>
+      </review>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="2" reviewerId="44a0bdd8-6624-4a73-a661-7190ddf070b3" reviewerName="David FitzGerald" reviewerEmail="fitzgerald@ecoinvent.org" reviewDate="2023-11-03">
+        <otherDetails xml:lang="en"/>
+      </review>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="2" reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2023-11-03">
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'carbon content, fossil':
+ - Input='5E-05', Output='0'
+ - Input &gt; output by 5E-05 kg
+
+Property 'price':
+ - Input='0', Output='13.49'
+ - Input &lt; output by 13.49 EUR2005 (100% of output)
+
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): dry mass=1, water in wet mass=0, carbon content, non-fossil=0, carbon content, fossil=0, wet mass=1, water content=0
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): dry mass=1, water in wet mass=0, carbon content, non-fossil=0, carbon content, fossil=0, wet mass=1, water content=0
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="cd88fc51-6ba7-4d23-8d7d-e67197a55d4a" isActiveAuthor="true" personName="Edwin Rua" personEmail="erua@ub.edu"/>
+      <dataGeneratorAndPublication personId="cd88fc51-6ba7-4d23-8d7d-e67197a55d4a" personName="Edwin Rua" personEmail="erua@ub.edu" isCopyrightProtected="true" accessRestrictedTo="1"/>
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="2" minorRevision="0" internalSchemaVersion="2.0.12" defaultLanguage="en" creationTimestamp="2022-12-21T15:05:13" lastEditTimestamp="2023-11-03T10:20:10" fileGenerator="EcoEditor 3.13.5000.19341" fileTimestamp="2023-11-03T10:20:10" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

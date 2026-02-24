@@ -1,0 +1,1700 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.EcoInvent.org/EcoSpold02 ../../schemas/datasets/EcoSpold02.xsd http://www.EcoInvent.org/UsedUserMasterData ../../schemas/datasets/EcoSpold02UserMasterData.xsd">
+  <childActivityDataset>
+    <activityDescription>
+      <activity specialActivityType="0" id="0030acf3-7136-569d-b842-de4cc63f397c" activityNameId="71d80919-bdc4-4b30-84a9-41f345155175" parentActivityId="9796530c-0ca6-457a-bf0d-dccc877d6ea5" inheritanceDepth="-1" type="1">
+        <activityName xml:lang="en">mandarin production, sorted and graded</activityName>
+        <synonym xml:lang="en">Soft Citrus</synonym>
+        <synonym xml:lang="en">Tangerine</synonym>
+        <synonym xml:lang="en">Satsumas</synonym>
+        <synonym xml:lang="en">Clementine</synonym>
+        <includedActivitiesStart xml:lang="en">The activity starts with the mandarin transported from the orchard to the packhouse facilities.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">The activity ends with the mandarins sorted by grade and ready for the market. Packaging is excluded. From the farm the fruit is transported in crates (plastic or wooden) in small trucks or trailers pulled by tractors for shroter distances or large vehicles for longer distances to the centralised packhouses which are generally off-site (Ortmann, 2005). From here the fruit is taken to the packaging lines where it is graded and sorted and thereafter packed into corrugated cardboard boxes, which are then packed onto pallets with dimension 1x1.2 m. The activity includes the facility and the machineries (building hall and conveyor belts).</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="0">This dataset is a copy of the South African dataset which model the packhouse facilities of the soft citrus value chain. </text>
+          <text xml:lang="en" index="1">The dataset describes the packhouse stage of the mandarin value chain. The reference flow is 1kg of fresh grade mandarin  to be sent to the market and processing grade mandarin that is sent to the food industry (juices, canned fruit...). After being harvested, mandarins are sent to packhouses for sorting/grading and packing. The mandarins are jumble packed meaning that they aren't packed in a specific pattern, but boxes are filled to a specific weight (15 kg). Details on the packaging material required are given below.</text>
+          <text xml:lang="en" index="2">POLYPROPYLENE, GRANULATE AND THE EXTRUSION OF POLYPROPYLENE: are used to model plastic bins which are made of polypropylene and have a  lifespan of 30 years (Jumbo Bin in the fruit growing industry; Mpac Plastic Continers). A 0.00026 kg of polypropylene is used per 1kg of sorted and graded mandarin.</text>
+          <text xml:lang="en" index="3">PACKAGING FILM, LOW DENSITY POLYETHYLENE: 0.000153 kg of packaging film are used per 1 kg fo sorted and graded mandarin. Packaing films are used to pack the boxes when they are placed onto pallets.</text>
+          <text xml:lang="en" index="4">KRAFT PAPER, BLEACHED: 0.000245 kg of kraft paper are use per k1 of sorted and graded mandarin. Soft citrus fruit for local and export market is either packed loosely in cardboard boxes with inner packaging consisting of pulp (kraft paper).</text>
+          <text xml:lang="en" index="5">CORRUGATED CARDBARD: 0.07647 kg of corrugated cardbard for 1 kg of sorted and graded mandarin. The amount of corrugated board used was calculated to 57.2 kg corrugated board / ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</text>
+        </generalComment>
+        <tag>combined production</tag>
+      </activity>
+      <classification classificationId="562d396f-b27d-437b-b69f-3bfe87fcd737">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">0123:Growing of citrus fruits</classificationValue>
+      </classification>
+      <geography geographyId="7846b897-7c04-4f9f-b607-2b83fcd9a74c">
+        <shortname xml:lang="en">RoW</shortname>
+        <comment>
+          <text xml:lang="en" index="0">This dataset is a copy of the South African dataset which model the packhouse facilities of the soft citrus value chain. Uncertainty has been modified accordingly.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="3"/>
+      <timePeriod startDate="2015-01-01" endDate="2023-12-31" isDataValidForEntirePeriod="true"/>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="f53b0dba-5cb3-5224-9bd8-a5a485c29a2c" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="RP" amount="1.0" intermediateExchangeId="0b588bb3-b211-420e-80ed-f6f4fba01f8a" productionVolumeAmount="2633783037528.3" productionVolumeVariableName="APV_glo" productionVolumeMathematicalRelation="30418767000*86.59">
+        <name xml:lang="en">mandarin, fresh grade</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">The reference flow is 1kg of fresh grade mandarin to be sent to the market and processing grade mandarin to be sent to the food industry to be further processed.The fresh grade mandarin represent the 86.59% of the mandarin that comes from the farm stage.</comment>
+        <property propertyId="22c3e383-753d-4c96-ab4a-3b9950ef7614" variableName="RP_amount_kg" amount="0.881057268722467" isDefiningValue="false" mathematicalRelation="1/(1+0.135)" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">amount in mass units</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Combined mass of mandarin, fresh grade and mandarin, processing grade.</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.2034837288" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.38412" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.38412" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.52974" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.71" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Literature. CGA. (2016). Key Industry Statistics for Citrus Growers 2016. Durban, South Africa: Citrus Growers’ Association of South Africa.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.887718503416771" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.47026" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <productionVolumeComment xml:lang="en">Tot Production volume as per FAO 2014 Mandarin production = 30418767000 kg; Mandarin consumer grade are 86,59% of the tot PV</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="c5edd7c4-9902-47a3-bcc2-abf32daa468d">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">01324: Tangerines, mandarins, clementines</classificationValue>
+        </classification>
+        <classification classificationId="102153a7-687b-5ac5-85c5-d3c32cd54a23">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">080521: Fruit, edible; mandarins (including tangerines and satsumas), fresh or dried</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="6a5c93ca-dd48-54a5-8c28-69cc13239610" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" amount="0.00016272026431718065" isCalculatedAmount="true" mathematicalRelation="0.000591*(RP/1.135)+0.000591*(RP1/1.135)" intermediateExchangeId="9e68d1ff-39d8-4962-a34f-c1cf285a3ff7" activityLinkId="bad1b691-56b6-5bbc-b872-0a998e4a5b7f">
+        <name xml:lang="en">EUR-flat pallet</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment xml:lang="en">Disposable and reusable wooden pallets have a  lifespan of 10 years (Jumbo Bin in the fruit growing industry; Mpac Plastic Continers).</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00016272026431718065" mu="-8.723478001297222" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="11.356855154052639" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.6194648265846905" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0311350523111135" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.588329774273577" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="18.3333333333333" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="335.11" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">LHV is calculated based on the Carbon content of the product. More details can be found on the respective documentation.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.2" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="3.66666666666666" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="22.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="27893791-673a-498a-b4e3-7deae5e019ac">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31700: Packing cases, boxes, crates, drums and similar packings, of wood; cable-drums of wood; pallets, box pallets a[…]</classificationValue>
+        </classification>
+        <classification classificationId="279161ca-856d-538a-af45-57595fb8f235">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">441520: Wood; pallets, box pallets and other load boards; pallet collars</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="94903916-94e1-52dd-bfa2-8ae3262bbc4c" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" amount="0.0003579845814977974" isCalculatedAmount="true" mathematicalRelation="0.000591*(RP/1.135)+0.000591*(RP1/1.135)" intermediateExchangeId="9e68d1ff-39d8-4962-a34f-c1cf285a3ff7" activityLinkId="e7b03556-7df3-5e17-b4e7-f37ca8fbbe3f">
+        <name xml:lang="en">EUR-flat pallet</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment xml:lang="en">Disposable and reusable wooden pallets have a  lifespan of 10 years (Jumbo Bin in the fruit growing industry; Mpac Plastic Continers).</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0003579845814977974" mu="-7.935020640932953" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="11.356855154052639" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.6194648265846905" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0311350523111135" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.588329774273577" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="18.3333333333333" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="335.11" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">LHV is calculated based on the Carbon content of the product. More details can be found on the respective documentation.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.2" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="3.66666666666666" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="22.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="27893791-673a-498a-b4e3-7deae5e019ac">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31700: Packing cases, boxes, crates, drums and similar packings, of wood; cable-drums of wood; pallets, box pallets a[…]</classificationValue>
+        </classification>
+        <classification classificationId="279161ca-856d-538a-af45-57595fb8f235">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">441520: Wood; pallets, box pallets and other load boards; pallet collars</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ee1c1445-e451-568b-a7c3-e7e867dd0e1d" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="-0.0030159706134268486" isCalculatedAmount="true" mathematicalRelation="0.019863*(RP/1.135)+0.019863*(RP1/1.135)" intermediateExchangeId="50306184-2a7e-4825-8e5d-fe8e674d1274" activityLinkId="4a0214a0-b482-5c49-b69b-cf5a4f87c77c" productionVolumeMathematicalRelation="30418767000*1.72">
+        <name xml:lang="en">biowaste</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">This accounts for the wastes that may occur during the grading and sorting of the mandaring at packhouses: this represents the 1,72% of the mandarin that comes from the farm stage. The fruit making up the waste component is a combinaiton of incoming fruit not conforming to certain criteria fro packing due to size or damage during transit or packing.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0030159706134268486" mu="-5.803833572442634" variance="0.0" varianceWithPedigreeUncertainty="0.0027"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.06496" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.1624" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.1624" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Tab 12.2, ecoinvent v2.2 report 17. C content total=16.24%</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.4" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tab 12.2, ecoinvent v2.2 report 17</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="4.29" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Value taken from the general comment of the treatment dataset.</comment>
+        </property>
+        <property propertyId="f53a5dbc-3bd3-4570-adff-b00790ea3ffc" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">nitrogen content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="1.5" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.6" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tab 12.2, ecoinvent v2.2 report 17</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">data for biowaste</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Tot Production volume as per FAO 2014 Mandarin production = 30418767000 kg;  Biowaste are 1,72% of the tot PV</productionVolumeComment>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <classification classificationId="8c2cf922-a5af-4817-abc9-c57c3b26708b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">391: Wastes from food and tobacco industry</classificationValue>
+        </classification>
+        <classification classificationId="65a62151-a533-593e-8531-c138a0e09546">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">382510: Residual products of the chemical or allied industries, not elsewhere specified or included; municipal waste</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="69dbcbc5-eab3-59de-9044-1b3d4ff1f877" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="-0.0036484188104018425" isCalculatedAmount="true" mathematicalRelation="0.019863*(RP/1.135)+0.019863*(RP1/1.135)" intermediateExchangeId="50306184-2a7e-4825-8e5d-fe8e674d1274" activityLinkId="662cbf41-bb88-53da-891e-86039021a626" productionVolumeMathematicalRelation="30418767000*1.72">
+        <name xml:lang="en">biowaste</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">This accounts for the wastes that may occur during the grading and sorting of the mandaring at packhouses: this represents the 1,72% of the mandarin that comes from the farm stage. The fruit making up the waste component is a combinaiton of incoming fruit not conforming to certain criteria fro packing due to size or damage during transit or packing.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0036484188104018425" mu="-5.613461407876736" variance="0.0" varianceWithPedigreeUncertainty="0.0027"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.06496" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.1624" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.1624" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Tab 12.2, ecoinvent v2.2 report 17. C content total=16.24%</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.4" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tab 12.2, ecoinvent v2.2 report 17</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="4.29" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Value taken from the general comment of the treatment dataset.</comment>
+        </property>
+        <property propertyId="f53a5dbc-3bd3-4570-adff-b00790ea3ffc" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">nitrogen content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="1.5" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.6" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tab 12.2, ecoinvent v2.2 report 17</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">data for biowaste</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Tot Production volume as per FAO 2014 Mandarin production = 30418767000 kg;  Biowaste are 1,72% of the tot PV</productionVolumeComment>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <classification classificationId="8c2cf922-a5af-4817-abc9-c57c3b26708b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">391: Wastes from food and tobacco industry</classificationValue>
+        </classification>
+        <classification classificationId="65a62151-a533-593e-8531-c138a0e09546">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">382510: Residual products of the chemical or allied industries, not elsewhere specified or included; municipal waste</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="307892cc-e377-5819-8717-2d2e73622acf" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="-0.01083605110480567" isCalculatedAmount="true" mathematicalRelation="0.019863*(RP/1.135)+0.019863*(RP1/1.135)" intermediateExchangeId="50306184-2a7e-4825-8e5d-fe8e674d1274" activityLinkId="b86afa88-8999-58f7-99cb-5e0b7968dc73" productionVolumeMathematicalRelation="30418767000*1.72">
+        <name xml:lang="en">biowaste</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">This accounts for the wastes that may occur during the grading and sorting of the mandaring at packhouses: this represents the 1,72% of the mandarin that comes from the farm stage. The fruit making up the waste component is a combinaiton of incoming fruit not conforming to certain criteria fro packing due to size or damage during transit or packing.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.01083605110480567" mu="-4.524876638564645" variance="0.0" varianceWithPedigreeUncertainty="0.0027"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.06496" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.1624" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.1624" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Tab 12.2, ecoinvent v2.2 report 17. C content total=16.24%</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.4" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tab 12.2, ecoinvent v2.2 report 17</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="4.29" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Value taken from the general comment of the treatment dataset.</comment>
+        </property>
+        <property propertyId="f53a5dbc-3bd3-4570-adff-b00790ea3ffc" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">nitrogen content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="1.5" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.6" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tab 12.2, ecoinvent v2.2 report 17</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">data for biowaste</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Tot Production volume as per FAO 2014 Mandarin production = 30418767000 kg;  Biowaste are 1,72% of the tot PV</productionVolumeComment>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <classification classificationId="8c2cf922-a5af-4817-abc9-c57c3b26708b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">391: Wastes from food and tobacco industry</classificationValue>
+        </classification>
+        <classification classificationId="65a62151-a533-593e-8531-c138a0e09546">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">382510: Residual products of the chemical or allied industries, not elsewhere specified or included; municipal waste</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="1daf2b79-228b-5244-8702-2deba2442c81" unitId="1017f68a-f818-4f9d-a34d-a31e7386f628" amount="2.484581497797357E-06" isCalculatedAmount="true" mathematicalRelation="2.82E-06*(RP/1.135)+2.82E-06*(RP1/1.135)" intermediateExchangeId="d72638dc-71b8-4c4f-b5c7-72cbe6bdd145" activityLinkId="4282443a-7376-5c89-8655-97d2b9b618a1">
+        <name xml:lang="en">building, hall</name>
+        <unitName xml:lang="en">m2</unitName>
+        <comment xml:lang="en">The area of the packhouse was assumed to be 2.82*e-10 m2/yr/kg of marketed soft citrus. Data came from two citrus packhouses: African Packers and Ponders End Traders Packhouse (Afrifresh.co.za, 2015).  Lifetime expectancy was assumed to 50 years (Kellenberger at al., 2007)</comment>
+        <uncertainty>
+          <lognormal meanValue="2.484581497797357E-06" mu="-12.905406323947618" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="bc2f9a9d-6d47-42b4-bd8a-3ef63dae0258">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">5312: Non-residential buildings</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="81cc79ca-0451-5ba9-a0ea-222580c39a7e" unitId="f2aaa4ba-fb58-49a7-a552-e7f64366f379" amount="1.2422907488986785E-07" isCalculatedAmount="true" mathematicalRelation="1.41E-07*(RP/1.135)+1.41E-07*(RP1/1.135)" intermediateExchangeId="26f457d5-9138-4502-a0b5-a3726ca8efa6" activityLinkId="d5d10359-be3c-5696-9851-34ad4a160637">
+        <name xml:lang="en">conveyor belt</name>
+        <unitName xml:lang="en">m</unitName>
+        <comment xml:lang="en">The ration of conveyor belt length to packhouse area was assumed to be 0.25m/m2. Data came from Rekopane farm in Nothern Cape. Lifetime expectancy was assumed to 25 years (Kellenberger at al., 2007)</comment>
+        <uncertainty>
+          <lognormal meanValue="1.2422907488986785E-07" mu="-15.901138597501609" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="a95df5db-b097-41d8-8b5d-df2fc2a5b61c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">43550: Pneumatic and other continuous action elevators and conveyors, for goods or materials</classificationValue>
+        </classification>
+        <classification classificationId="c550f5dc-da92-5a2e-a8a6-77a5a9103ad9">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">4010: Conveyor or transmission belts or belting, of vulcanised rubber</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="d8179356-e469-528d-b150-e2e432324d83" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1.0966690552592528E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="07a808ff-ba16-5a51-aaee-93f61d70448a">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="1.0966690552592528E-05" mu="-11.420648010815478" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="5cdbb4ba-3b9c-5754-81c3-f9d95c74f576" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0025023119639587888" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="0a804ce2-246c-5e08-a63b-0f824999d421">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0025023119639587888" mu="-5.990540188875203" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="42acad77-45a6-5f3f-938c-857463daffe2" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="3.7722340522949537E-06" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="0cbddbe5-686b-568d-883d-dc0ed8b1c4fa">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.7722340522949537E-06" mu="-12.487843145198951" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="7fa0dd57-5925-5047-ab90-cd401aed164b" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="6.667940749096876E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="13353ccf-ffea-579f-acab-bb66091fda9d">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="6.667940749096876E-05" mu="-9.615614385979457" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="932897b8-c418-534c-b627-df37bf978130" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1.2671751080204486E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="14d6e871-1f67-55f6-b7d2-c2b0812e77d0">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="1.2671751080204486E-05" mu="-11.27613536637708" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8e255d31-9657-5a72-83ce-e8694f485df8" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="3.4318186844513893E-06" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="1a9c8640-75f8-5478-8cfb-1cc17f6f16a0">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.4318186844513893E-06" mu="-12.582420208604965" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="1263a0c3-c989-5d32-bb07-65598f4412f2" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="2.4097321332427253E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="1c6d072c-37cc-5d97-9f5e-366dd7dec183">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="2.4097321332427253E-05" mu="-10.633409871677129" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="42b08168-3f3d-5704-9bec-228eb5823840" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="3.981920791693247E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="29cd245a-7b1b-54e5-982b-c5ddf310fbb8">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.981920791693247E-05" mu="-10.131161151114902" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="842798fd-0b08-5757-a186-8d8871ce4963" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="2.770657351494024E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="2cecf8c7-e419-5799-afc9-b6b1f98733b0">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="2.770657351494024E-05" mu="-10.493840861916112" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="78885c2e-a4cc-5019-bc2c-779f984af6c6" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0004257968615232545" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="3081b9e9-552d-597b-a6d2-5b2cd107fdc8">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0004257968615232545" mu="-7.761548176308822" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="739b1d6a-7dca-5334-a4ac-66482c4dd320" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="3.976206370312343E-06" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="31300474-8207-50dc-93dd-6a624ac8497b">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.976206370312343E-06" mu="-12.435182366514814" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="f41b1a53-e443-5a45-af78-426934703512" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00017514648964491385" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="3c8b6d66-b2cd-543c-8b3f-003d573c63f9">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00017514648964491385" mu="-8.649887850514691" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="abe2f725-7461-5ac2-b894-1ea96d356bf3" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0001116993734500687" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="42a3706b-9856-5e1b-b1e8-1bf1508c8cc9">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0001116993734500687" mu="-9.099699461125363" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="10929bed-21c1-5865-b569-6aff49104e7d" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.03645939969300664" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="5dd48fca-ac27-5399-bd81-78217698df49">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.03645939969300664" mu="-3.311555974677736" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="002c7e3a-3884-59cf-8364-48fee947ac7f" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0035987219516602515" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="687d9040-caf0-5c45-88c8-afe382a97760">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0035987219516602515" mu="-5.627176509979966" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="68f1bf7c-e88a-5222-93ad-ce5b0e05ca5b" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="6.227398420447626E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="6cb1b35f-a9ae-5fce-9156-f64170ff3acd">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="6.227398420447626E-05" mu="-9.683966808398662" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="b0e25ec3-4a75-585b-a62f-988de2f76a1d" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1.3215347054611239E-06" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="73cbaa9e-31fa-5d06-aa50-f5de2769d0af">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="1.3215347054611239E-06" mu="-13.536716841074288" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="22299575-ba8a-5874-bd77-89e949af9327" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1.910396486717967E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="7d7ffc46-971d-55b3-bc1f-4cd63504c78e">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="1.910396486717967E-05" mu="-10.865614659785313" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="1c161dc1-a506-5533-847b-967eee043e64" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00826403971339003" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="7f71b25b-8d35-53e5-be88-2c7d52df6d19">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00826403971339003" mu="-4.79584174158704" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="469bf6ad-ca10-5cd2-9daa-7ae028bee1a9" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="4.3518163419464666E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="838c674a-1a38-53e1-beab-76ec521992a4">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="4.3518163419464666E-05" mu="-10.042332157146575" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="864ddd8d-dfe2-59df-87b5-b8551b12dbe6" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="8.665908728199778E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="90843df8-6e6f-5a99-b9ed-6d0449aba5a6">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="8.665908728199778E-05" mu="-9.353528673879705" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="dad5bf56-e552-5f7b-a3ba-1153c514d036" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="8.347181255567966E-07" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="922068a8-84fe-595d-87e7-f2a6389bee73">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="8.347181255567966E-07" mu="-13.996171743270024" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="e0fe4b0d-30df-50c3-b31e-cafd7ee3183c" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="2.2415693767139773E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="93ac4e7a-5c47-569a-8581-000a84447f14">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="2.2415693767139773E-05" mu="-10.705749229814662" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="80b1d43a-4deb-5100-bd4e-48dd9d32f135" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="3.7161323036635255E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="97379653-d166-5866-9090-146ce074c41b">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.7161323036635255E-05" mu="-10.200242040867849" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="186b041c-f776-5b7b-bac6-9f3f84a4bb8f" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.01255243125783013" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="9d903b9a-70b8-538c-98f9-5af9a5719fc1">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.01255243125783013" mu="-4.377840906443232" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="2cb642ed-99a6-502d-b8df-8d828c60623f" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1.4281140302031833E-06" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="a4a25fdc-5153-5c6f-a583-44a8d9511c8f">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="1.4281140302031833E-06" mu="-13.459155844151507" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="17e0585f-1a3c-5c62-bb71-7d9d676fdd1d" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="3.289207230213413E-06" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="a51519f4-5e62-5ac8-982e-189054b9d629">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.289207230213413E-06" mu="-12.624863985684321" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="780187c9-65a5-5aed-b0ce-50eb52474c6f" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1.3007340944772371E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="a570274b-6288-538a-af4e-e52756c646b4">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="1.3007340944772371E-05" mu="-11.24999667181963" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="0d455ef1-430d-59a7-9a63-379e60c23b40" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="2.9810858604264548E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="ad9c50b5-6abb-51f7-8680-e54024abdcdc">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="2.9810858604264548E-05" mu="-10.420637848130726" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="622aec82-2dc0-5185-bada-92248b45fa40" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1.006637028996297E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="b36b6129-8658-5ea7-9ad9-7504a82a0f55">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="1.006637028996297E-05" mu="-11.506310364079374" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="92b46485-f8f4-5e8f-9d08-7511becb871e" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="4.549170600434604E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="bb9688d5-ef1d-5036-90db-e2056ec164ff">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="4.549170600434604E-05" mu="-9.997980534242181" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a7931ac4-7cab-59a8-852b-70e3c6b30546" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="3.38182032998164E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="ce8ccf98-a2dc-53df-bcb8-1c41b947a0b0">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.38182032998164E-05" mu="-10.294511341280074" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="d732c995-1225-5f98-b659-51219988b820" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="2.0098041349158238E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="dd16e963-a2a3-51b4-a094-b1e5a27fc847">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="2.0098041349158238E-05" mu="-10.814888192962858" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="25fa606c-30a4-5b51-8f5b-66a341d03e32" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="3.3397725559174515E-05" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="e9439de6-dd42-59fa-9eaf-d9c18b21aeab">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.3397725559174515E-05" mu="-10.30702275733103" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="b769a79b-880b-5f10-9133-ef401b5bdf40" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0006218561074152295" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="f485c125-9042-537d-8b6b-2e8ec77b87a7">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0006218561074152295" mu="-7.382801830548711" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a1967d6c-6323-5297-bf8a-dd898f264f95" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="6.228679612789795E-06" isCalculatedAmount="true" mathematicalRelation="0.0742*(RP/1.135)+0.0742*(RP1/1.135)" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="fe932a37-c29e-5fa2-b1b7-1aab71516162">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Electricity at the packhouse stage is used for the operation of conveyor belts, lighting and other machinery. The amount of electricity used was calculated to 55.5 kWh grid electricity/ ton of soft citrus marketed and then scaled to the reference flow of 1 kg. Data came from different packhouse from different subregions in WC province.</comment>
+        <uncertainty>
+          <lognormal meanValue="6.228679612789795E-06" mu="-11.986346187789554" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="0185d347-282d-5275-a640-f9e48de2f04e">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">271600: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="f933f116-81a5-5923-8c05-af338fdb10cf" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="1.0175004405286343" isCalculatedAmount="true" mathematicalRelation="1.154863*(RP/1.135)+1.154863*(RP1/1.135)" intermediateExchangeId="9c6b672a-661e-40c3-a9a0-902b33cc6871" activityLinkId="47a88244-a6ba-555f-9f52-ca3720bffb81">
+        <name xml:lang="en">mandarin</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Mandaring from the farm</comment>
+        <uncertainty>
+          <lognormal meanValue="1.0175004405286343" mu="0.017349071286494027" variance="0.0" varianceWithPedigreeUncertainty="0.0047"/>
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.20853587236699156" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.3841230769" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.3841230769" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.542888165038" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.842" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.457111834962" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="c5edd7c4-9902-47a3-bcc2-abf32daa468d">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">01324: Tangerines, mandarins, clementines</classificationValue>
+        </classification>
+        <classification classificationId="102153a7-687b-5ac5-85c5-d3c32cd54a23">
+          <classificationSystem xml:lang="en">HS2017</classificationSystem>
+          <classificationValue xml:lang="en">080521: Fruit, edible; mandarins (including tangerines and satsumas), fresh or dried</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">This dataset is a copy of the South African dataset which model the packhouse facilities of the soft citrus value chain. Data for  packhouses in ZA were taken from Data from Company Budget Report (Combuds) and previuos study done on the Mandarin sector in South Africa (Konig, 2015). Data from APV at global level were taken from FAOSTAT 2014. </samplingProcedure>
+        <extrapolations xml:lang="en">This dataset is a copy of the South African dataset which model the packhouse facilities of the soft citrus value chain. Data for  packhouses in ZA were taken from Data from Company Budget Report (Combuds) and previuos study done on the Mandarin sector in South Africa (Konig, 2015). Data from APV at global level were taken from FAOSTAT 2014. Uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="58" reviewerId="f86c02d3-2c12-4c25-ad03-33af05bcfe63" reviewerName="Tereza Levova" reviewerEmail="levova@ecoinvent.org" reviewDate="2017-12-08">
+        <otherDetails xml:lang="en"/>
+      </review>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="90" reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2018-02-12">
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'carbon content, fossil':
+ - Input='0,000337348291790914', Output='0'
+ - Input &gt; output by 0,000337348291790914 kg
+
+Property 'carbon content, non-fossil':
+ - Input='0,247204916273615', Output='0,232244332668'
+ - Input &gt; output by 0,0149605836056152 kg (6,44% of output)
+
+Property 'dry mass':
+ - Input='0,63779645494028', Output='0,6092001'
+ - Input &gt; output by 0,0285963549402797 kg (4,69% of output)
+
+Property 'price':
+ - Input='0', Output='0,381'
+ - Input &lt; output by 0,381 EUR2005 (100% of output)
+
+Property 'water in wet mass':
+ - Input='0,53006854505972', Output='0,5456629'
+ - Input &lt; output by 0,0155943549402797 kg (2,86% of output)
+
+Property 'wet mass':
+ - Input='1,167865', Output='1,154863'
+ - Input &gt; output by 0,013002 kg (1,13% of output)
+
+
+- Amount of property 'nitrogen content=0' of exchange 'biowaste' deviates from the default amount in the master file.
+
+- The total water in wet mass of all input exchanges (0,53006854505972) and output exchanges (0,5456629) is unbalanced.
+
+- The dataset contains user added exchange master data entries. The following user added exchanges do not contain product information data. Please consider adding the appropriate data before submitting the dataset for review.
+ - mandarin, fresh grade
+ - mandarin, processing grade
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): dry mass=0,4, water content=1,5, nitrogen content=0, water in wet mass=0,6, carbon content, non-fossil=0,1624, carbon content, fossil=0, wet mass=1
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): dry mass=0,4, water content=1,5, nitrogen content=0, water in wet mass=0,6, carbon content, non-fossil=0,1624, carbon content, fossil=0, wet mass=1
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="baa322cd-d8c1-4256-bc17-0c93acb261f0" isActiveAuthor="true" personName="Russo" personEmail="v.russo@uct.ac.za"/>
+      <dataGeneratorAndPublication personId="c4597934-ecac-422c-b431-382e85fdcb83" personName="[System]" personEmail="support@ecoinvent.org" dataPublishedIn="2" publishedSourceId="bf5fbf98-d6b9-43a7-9160-fb278ffb99ce" publishedSourceYear="2017" publishedSourceFirstAuthor="Russo, V." isCopyrightProtected="true" accessRestrictedTo="1"/>
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="3" minorRevision="0" internalSchemaVersion="2.0.12" defaultLanguage="en" creationTimestamp="2017-11-14T13:48:20" lastEditTimestamp="2018-02-02T10:45:44" fileGenerator="EcoEditor 3.8.600.15190" fileTimestamp="2018-02-02T10:45:44" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

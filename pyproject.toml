@@ -1,0 +1,33 @@
+[project]
+name = "bw25-playground"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    # --- Brightway core (pin to the working combo) ---
+    "bw2io==0.9.14",
+    "bw2data>=4,<5",
+    "bw2calc>=2,<3",
+    "bw-processing>=1,<2",
+
+    # --- your stack ---
+    "matplotlib>=3.10.8",
+    "numpy>=1.26.4",
+    "pandas>=2.3.3",
+    "scipy>=1.17.0",
+    "networkx>=3.3",
+    "pyvis>=0.3.2",
+    "plotly>=5.22.0",
+    "python-dotenv>=1.0.1",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.2.0",
+]
+
+[project.optional-dependencies]
+fastsolvers = ["scikit-umfpack"]
+

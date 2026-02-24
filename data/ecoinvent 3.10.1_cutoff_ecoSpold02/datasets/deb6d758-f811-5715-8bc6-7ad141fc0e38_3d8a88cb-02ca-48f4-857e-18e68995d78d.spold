@@ -1,0 +1,695 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.EcoInvent.org/EcoSpold02 ../../schemas/datasets/EcoSpold02.xsd http://www.EcoInvent.org/UsedUserMasterData ../../schemas/datasets/EcoSpold02UserMasterData.xsd">
+  <childActivityDataset>
+    <activityDescription>
+      <activity specialActivityType="0" id="deb6d758-f811-5715-8bc6-7ad141fc0e38" activityNameId="92721f2e-4683-4c51-8ec9-488c544212e0" parentActivityId="d2ace059-f867-42a8-b013-78409c2c6c69" inheritanceDepth="-1" type="1">
+        <activityName xml:lang="en">transport, freight, lorry with reefer, freezing</activityName>
+        <includedActivitiesStart xml:lang="en">This dataset simply combine several activities - transport, freight, lorry of bigger sizes and operation of reefer, For more information on these two activities please see the datasets representing these two activities. </includedActivitiesStart>
+        <generalComment>
+          <text xml:lang="en" index="0">This dataset represent transport of reefer (refrigerated container) by a lorry (truck with semi-trailer). The operation mode of the reefer is freezing (temperature between -35°C and -18°C).</text>
+          <text xml:lang="en" index="1">The amount of operation of the reefer needed is calculated using the assumption of the average speed of the lorry.</text>
+          <text xml:lang="en" index="2">While the small lorries have build-in refrigeration machine the bigger trucks with semi-trailer are able to directly transport whole reefer. This dataset represents exactly this kind of transport.</text>
+          <imageUrl index="3">https://db3.ecoinvent.org/images/d1e205f4-8999-4e2d-af7b-b57c4ae907ac</imageUrl>
+          <text xml:lang="en" index="4">Truck with semi-trailer transporting a reefer (http://commons.wikimedia.org/wiki/File:Volvo_FH12-Inger_(F)-2003.jpg, accessed 20141216).</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="0783fec2-42b8-41e0-9944-cdba0fe68601">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">4923:Freight transport by road</classificationValue>
+      </classification>
+      <geography geographyId="34dbbff8-88ce-11de-ad60-0019e336be3a">
+        <shortname xml:lang="en">GLO</shortname>
+      </geography>
+      <technology technologyLevel="3"/>
+      <timePeriod startDate="2010-01-01" endDate="2023-12-31" isDataValidForEntirePeriod="true"/>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="fccae377-2d55-53f6-b864-b78b7e23b639" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" variableName="transport_lorry_RP" amount="1.0" intermediateExchangeId="3d8a88cb-02ca-48f4-857e-18e68995d78d" productionVolumeAmount="100740000000.0" productionVolumeMathematicalRelation="4.38E12*0.05*0.46">
+        <name xml:lang="en">transport, freight, lorry with reefer, freezing</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en"/>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.02163296280705376" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated based on inputs: The price of the product has been calculated as a sum of the values of the material and energy inputs for this product. This value is therefore a rough estimation. It may underestimate the real price since there are additional expenses when producing any product. These expences can include for example labour costs, treatment of waste materials and profit for the producer. Please consider carefully whether this level of data quality is acceptable for your application.</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated based on estimates and literature values.
+
+4.38E+12 tkm is the sum of production volumes of all the transport by lorries of the sizes entering this activity.
+
+It is estimated, that out of all the cargo 5% was cargo in need of atmosphere control.
+
+According to literature (Drawry, 2008, published in http://www.hamburg-sued.com/group/media/sharedmedia/dokumente/brochures/Reefer_guide.pdf, accessed 20141216) the type of food transported in reefers is following;
+
+31% fresh fruits and vegetables (excl. bananas)
+20% bananas
+24% meat and poultry
+19% fish and seafood
+6% various (medicine, flowers, etc.)
+
+The fruits and vegetables (54%) in general need to be cooled during its storage and transport and the meat and seafood (46%) need to be frozen. The various is divided half/half between cooling and freezing.</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="14775174-6a68-4ebf-8c59-115c845efea0">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">65111: Road transport services of freight by refrigerator vehicles</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8a663336-11b1-5dec-b00c-da467f23b8b7" unitId="241450a3-3497-4648-8c68-e44d04f64ac7" amount="0.925925925925926" isCalculatedAmount="true" mathematicalRelation="1000*( transport_lorry_RP/speed_lorry/24)" intermediateExchangeId="a40ce634-bd84-41fa-81e7-1cf02630df8c" activityLinkId="4a990a37-9511-58ac-b849-a030df488ae2">
+        <name xml:lang="en">operation, reefer, freezing</name>
+        <unitName xml:lang="en">kg*day</unitName>
+        <comment xml:lang="en">Calculated value based on estimated speed of the lorry.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.925925925925926" mu="-0.0769610411361282" variance="0.0006" varianceWithPedigreeUncertainty="0.0246"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="55617088-7249-4494-a3a9-cea930dd668a">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">67210: Refrigerated storage services</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="1dca4610-47d9-5679-8e85-2d6dc8eb9326" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.13050367403418658" intermediateExchangeId="f9895e44-5657-47fc-8eec-a4985e2bce2e" activityLinkId="0ea20899-e994-547d-8e23-09c454983a3f">
+        <name xml:lang="en">transport, freight, lorry 16-32 metric ton, EURO3</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.13050367403418658" mu="-2.0363538990970205" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="fe5aa738-b483-5256-8ddf-da8b3773be91" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.016720883202348994" intermediateExchangeId="f9895e44-5657-47fc-8eec-a4985e2bce2e" activityLinkId="7b73544a-33a4-5e2f-a09b-c7d7c0bcc16d">
+        <name xml:lang="en">transport, freight, lorry 16-32 metric ton, EURO3</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.016720883202348994" mu="-4.091096849613676" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="97817e5a-bdbe-5c2f-8a1a-ad87f876ec9f" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.014075442763464414" intermediateExchangeId="f9895e44-5657-47fc-8eec-a4985e2bce2e" activityLinkId="99a410a7-dcad-521a-b942-0b1f255b259f">
+        <name xml:lang="en">transport, freight, lorry 16-32 metric ton, EURO3</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.014075442763464414" mu="-4.263323648011412" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="7b98195c-b206-591e-a07a-b3352e1dc46e" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.01385735905258003" intermediateExchangeId="fb655769-10d8-446b-87f8-44ca60e20ed9" activityLinkId="3e2f47c2-687f-5b53-90d2-e8812c4c1a92">
+        <name xml:lang="en">transport, freight, lorry 16-32 metric ton, EURO4</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.01385735905258003" mu="-4.278938847923194" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="db0f9040-c5d0-57cc-bee6-4622d35325df" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.11894264094741998" intermediateExchangeId="fb655769-10d8-446b-87f8-44ca60e20ed9" activityLinkId="9ca313b6-2bef-5ff6-8ba5-2ef315fe8cb8">
+        <name xml:lang="en">transport, freight, lorry 16-32 metric ton, EURO4</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.11894264094741998" mu="-2.1291139109194237" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="0a9cb7f9-08c8-58e4-8e86-cd14ae7be183" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.035609794279546025" intermediateExchangeId="f4e8b38b-d6c7-423b-bc9c-13b4a13d55f8" activityLinkId="2943cbb7-5273-5bf1-bd40-2917ca1dad3c">
+        <name xml:lang="en">transport, freight, lorry 16-32 metric ton, EURO5</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.035609794279546025" mu="-3.335134558750811" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="eddebf31-0389-5a08-a885-f59e70cc3c1a" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.00618724604910827" intermediateExchangeId="f4e8b38b-d6c7-423b-bc9c-13b4a13d55f8" activityLinkId="552c71a1-7b9f-5b93-83f4-ad3dab1c79da">
+        <name xml:lang="en">transport, freight, lorry 16-32 metric ton, EURO5</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00618724604910827" mu="-5.085265194497958" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8a7edc64-d184-58a5-8811-734fbf4fcec3" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.002502959671345702" intermediateExchangeId="f4e8b38b-d6c7-423b-bc9c-13b4a13d55f8" activityLinkId="61f6115b-a522-5e82-9f17-7bb57fe3fe92">
+        <name xml:lang="en">transport, freight, lorry 16-32 metric ton, EURO5</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.002502959671345702" mu="-5.990281378789468" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="6c4006b9-50fb-583a-9614-f1a6d8bf314d" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.0008243459074953465" intermediateExchangeId="c691b775-a65a-4b77-a588-c8c6cd01c725" activityLinkId="75b0f70e-dd28-5cd3-8e90-4d82f8b30ba8">
+        <name xml:lang="en">transport, freight, lorry 16-32 metric ton, EURO6</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0008243459074953465" mu="-7.100920325492553" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="7e26de31-facf-5835-83a5-1136985cbfa2" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.007075654092504655" intermediateExchangeId="c691b775-a65a-4b77-a588-c8c6cd01c725" activityLinkId="d9f8d00e-ef9a-5f60-917e-e48e2942cdb7">
+        <name xml:lang="en">transport, freight, lorry 16-32 metric ton, EURO6</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.007075654092504655" mu="-4.951095388488781" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="50013f95-8d7d-50f0-a3dc-8d980daf01d4" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.0297939873673994" isCalculatedAmount="true" mathematicalRelation="1-( transport_in_1+ transport_in_2+ transport_in_3+ transport_in_5+ transport_in_4+ transport_in_8+ transport_in_6)" intermediateExchangeId="b909dee2-76bd-4eae-87d5-fc831390f99b" activityLinkId="2f638975-ecb2-539f-94e7-8f8c527f7478">
+        <name xml:lang="en">transport, freight, lorry &gt;32 metric ton, EURO3</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0297939873673994" mu="-3.5134486720229665" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="10616487-ec90-59f7-aae6-44ca6ef693ee" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.22772249211062387" isCalculatedAmount="true" mathematicalRelation="1-( transport_in_1+ transport_in_2+ transport_in_3+ transport_in_5+ transport_in_4+ transport_in_8+ transport_in_6)" intermediateExchangeId="b909dee2-76bd-4eae-87d5-fc831390f99b" activityLinkId="6f25a8c3-a4c6-5db2-ab1f-fa671356b0f6">
+        <name xml:lang="en">transport, freight, lorry &gt;32 metric ton, EURO3</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.22772249211062387" mu="-1.4796275312096923" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="70c05bfe-0cbb-534f-a57f-c19c4a39ce2c" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.02458352052197673" isCalculatedAmount="true" mathematicalRelation="1-( transport_in_1+ transport_in_2+ transport_in_3+ transport_in_5+ transport_in_4+ transport_in_8+ transport_in_6)" intermediateExchangeId="b909dee2-76bd-4eae-87d5-fc831390f99b" activityLinkId="e0951c41-effb-56da-bfcb-d822f109cbfd">
+        <name xml:lang="en">transport, freight, lorry &gt;32 metric ton, EURO3</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.02458352052197673" mu="-3.7056789580060165" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ee7cb0b7-7b0f-5490-a2a1-fdd55a2f4146" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.23367571553600808" intermediateExchangeId="fea783cd-1b3e-47ed-a4a1-346094ebc39a" activityLinkId="50f39b98-fe06-50ed-9e25-0778a7aa5ce5">
+        <name xml:lang="en">transport, freight, lorry &gt;32 metric ton, EURO4</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.23367571553600808" mu="-1.4538209558190744" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="515c7492-24cb-5282-a29e-49a1bcbb1d82" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.027224284463991933" intermediateExchangeId="fea783cd-1b3e-47ed-a4a1-346094ebc39a" activityLinkId="abd35fa9-d376-5f2a-81b1-d74b5e50ceb3">
+        <name xml:lang="en">transport, freight, lorry &gt;32 metric ton, EURO4</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.027224284463991933" mu="-3.6036458928228448" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="82ce096d-8fcf-5b33-b527-a502bb6612a7" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.013966255948170808" intermediateExchangeId="93afc03f-5832-4ec0-8d76-cf6e62efff26" activityLinkId="28531036-6aba-50f6-a19e-3fb7286b2c5c">
+        <name xml:lang="en">transport, freight, lorry &gt;32 metric ton, EURO5</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.013966255948170808" mu="-4.27111114820676" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="678ab74f-9080-59e8-87a1-6421d1db680f" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.00472088154007937" intermediateExchangeId="93afc03f-5832-4ec0-8d76-cf6e62efff26" activityLinkId="c16a457e-bf3e-5a75-b0f9-9011f1796c24">
+        <name xml:lang="en">transport, freight, lorry &gt;32 metric ton, EURO5</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00472088154007937" mu="-5.355759729857484" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="1ca89130-1326-529f-a5cc-e1c82cddc013" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.07621286251174983" intermediateExchangeId="93afc03f-5832-4ec0-8d76-cf6e62efff26" activityLinkId="f473abc0-27eb-5489-a16a-fa87840783a3">
+        <name xml:lang="en">transport, freight, lorry &gt;32 metric ton, EURO5</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.07621286251174983" mu="-2.574225031167751" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="289e52b4-0f2a-569f-8019-f651cdc638bd" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.001648691814990691" intermediateExchangeId="52a8f3c4-df5d-4f18-830b-985bcd8ac830" activityLinkId="44c92cb6-4abd-5628-80c9-f90d31c1c838">
+        <name xml:lang="en">transport, freight, lorry &gt;32 metric ton, EURO6</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.001648691814990691" mu="-6.40777314493261" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="59305f49-4f2e-55f2-b2c6-014b4d732364" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.014151308185009311" intermediateExchangeId="52a8f3c4-df5d-4f18-830b-985bcd8ac830" activityLinkId="f187906c-41ac-55f0-888b-e0bc4147e759">
+        <name xml:lang="en">transport, freight, lorry &gt;32 metric ton, EURO6</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Calculated.
+
+The shares of the different types of transport, freight, lorry are calculated from the production volumes (year 2010) of the supplying activities.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.014151308185009311" mu="-4.257948207928836" variance="0.0006" varianceWithPedigreeUncertainty="0.0566"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="5" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <parameter parameterId="b2cfcc5c-c289-4b3c-997c-023f31828fb2" amount="45.0" variableName="speed_lorry" unitId="33964fe2-6f44-4ed6-844d-b29dea69aad0">
+        <name xml:lang="en">speed</name>
+        <unitName xml:lang="en">km/hour</unitName>
+        <uncertainty>
+          <lognormal meanValue="45.0" mu="3.69" variance="0.0006" varianceWithPedigreeUncertainty="0.0166"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <comment xml:lang="en">Estimated value based on an expert judgement. This value represents an average speed of lorry including all stops and breaks.</comment>
+      </parameter>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+      </representativeness>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="27" reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2014-12-19">
+        <otherDetails xml:lang="en"/>
+      </review>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="27" reviewerId="f2bb9b6d-0f7b-47dc-ac26-8bda20f91ff3" reviewerName="Christian Bauer" reviewerEmail="christian.bauer@psi.ch" reviewDate="2014-12-19">
+        <otherDetails xml:lang="en"/>
+      </review>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="27" reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2015-07-23">
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Transport exchanges should not be added to non-market datasets.
+- The input exchange 'operation, reefer, freezing' does not have an activity link and therefore requires a market for that input to be available. If the market is not available the dataset will be put on hold at the end of its review and will remain on hold until such a market has been accepted into the ecoinvent database.
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="f86c02d3-2c12-4c25-ad03-33af05bcfe63" isActiveAuthor="true" personName="Tereza Levova" personEmail="levova@ecoinvent.org"/>
+      <dataGeneratorAndPublication personId="f86c02d3-2c12-4c25-ad03-33af05bcfe63" personName="Tereza Levova" personEmail="levova@ecoinvent.org" isCopyrightProtected="true" accessRestrictedTo="1"/>
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="1" minorRevision="0" internalSchemaVersion="2.0.8" defaultLanguage="en" creationTimestamp="2014-12-16T16:43:34" lastEditTimestamp="2015-07-03T16:04:24" fileGenerator="EcoEditor 3.6.120.14104" fileTimestamp="2015-07-03T16:04:24" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

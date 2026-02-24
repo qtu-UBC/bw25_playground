@@ -1,0 +1,356 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.EcoInvent.org/EcoSpold02 ../../schemas/datasets/EcoSpold02.xsd http://www.EcoInvent.org/UsedUserMasterData ../../schemas/datasets/EcoSpold02UserMasterData.xsd">
+  <childActivityDataset>
+    <activityDescription>
+      <activity specialActivityType="0" id="c4c04c17-7339-59d4-be9c-e0d1ef0d146f" activityNameId="d1a4a807-6f3e-4224-993a-a49bdd0e97e7" parentActivityId="6bb1f540-74a1-4828-9804-9975a227cb9e" inheritanceDepth="-1" type="1">
+        <activityName xml:lang="en">transport, passenger car, EURO 3</activityName>
+        <includedActivitiesEnd xml:lang="en">This activity provides an average transport, passenger car in the category EURO 3.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="0">This activity provides an average transport in a passenger car of the class EURO 3 with internal combustion engine. This is a linking activity, linking specific "transport, passenger car" in the EURO 3 class to a more generic product.</text>
+        </generalComment>
+        <tag>internal combustion engine</tag>
+      </activity>
+      <classification classificationId="be39820a-80ae-4419-9621-ec9499c13d21">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">4922:Other passenger land transport</classificationValue>
+      </classification>
+      <geography geographyId="0723d252-7e2a-11de-9820-0019e336be3a">
+        <shortname xml:lang="en">RER</shortname>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="0">Average transport in a passenger car of the category EURO 3 with internal combustion engine. The average takes into account different car sizes (small, medium and large) and fuel types (petrol, diesel and natural gas)</text>
+        </comment>
+      </technology>
+      <timePeriod startDate="2012-01-01" endDate="2023-12-31" isDataValidForEntirePeriod="true"/>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="8f74993e-8451-5939-aaab-95babdc888de" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="1.0" isCalculatedAmount="false" intermediateExchangeId="f49bd7fe-fef7-4d80-8f28-2ead540835b9" productionVolumeAmount="935806800000.0" productionVolumeMathematicalRelation="PV_sum">
+        <name xml:lang="en">transport, passenger car, EURO 3</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en"/>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.1624939994126622" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated based on inputs: The price of the product has been calculated as a sum of the values of the material and energy inputs for this product. This value is therefore a rough estimation. It may underestimate the real price since there are additional expenses when producing any product. These expences can include for example labour costs, treatment of waste materials and profit for the producer. Please consider carefully whether this level of data quality is acceptable for your application.</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">The production volume is equal to the sum of the individual production volumes of the specific transport, passenger cars in the class EURO 3. This value is obtained from the 9 ecoinvent datasets that produce a reference product "transport, passenger car,...* in the class EURO 3. This includes the car sizes small, medium and large and the fuel types petrol, diesel and natural gas.</productionVolumeComment>
+        <productionVolumeUncertainty>
+          <lognormal meanValue="1.0" mu="27.564674881862064" variance="0.0006" varianceWithPedigreeUncertainty="0.0166"/>
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </productionVolumeUncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8f62dfc8-bde6-5a60-b06f-2d9a6699bc22" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="0.094784521762398" isCalculatedAmount="true" mathematicalRelation="8.87E+10/ PV_sum" intermediateExchangeId="a34be1fd-b392-4901-9602-f7d25e46426d" activityLinkId="7a048702-6d54-56f5-89df-86e8e5ea7a90">
+        <name xml:lang="en">transport, passenger car, large size, diesel, EURO 3</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en">calculated value. Based on the production volume of this exchange divided by the total sum of the  production volumes from all the inputs. The production volumes are obtained from the ecoinvent datasets where these inputs are produced as reference product.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.094784521762398" mu="-2.356149155600119" variance="0.0006" varianceWithPedigreeUncertainty="0.0106"/>
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="3f8c22bd-2937-5e5c-8fa5-fee35eda2420" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="3.61185663536533E-05" isCalculatedAmount="true" mathematicalRelation="3.38E+07/ PV_sum" intermediateExchangeId="1f4388f9-8a79-452d-8364-802a5bc5f548" activityLinkId="ee9c2776-f0c4-5062-9392-38f62071a9ae">
+        <name xml:lang="en">transport, passenger car, large size, natural gas, EURO 3</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en">calculated value. Based on the production volume of this exchange divided by the total sum of the  production volumes from all the inputs. The production volumes are obtained from the ecoinvent datasets where these inputs are produced as reference product.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.61185663536533E-05" mu="-10.228703521408818" variance="0.0006" varianceWithPedigreeUncertainty="0.0106"/>
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="48d25dfd-b8c4-5b40-bd09-9f141212a486" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="0.0568493411246851" isCalculatedAmount="true" mathematicalRelation="5.32E+10/ PV_sum" intermediateExchangeId="4309fd1b-7875-491c-b158-65d8f5e2c663" activityLinkId="3ca4d0f5-4b25-50c1-bad8-38bb251e8485">
+        <name xml:lang="en">transport, passenger car, large size, petrol, EURO 3</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en">calculated value. Based on the production volume of this exchange divided by the total sum of the  production volumes from all the inputs. The production volumes are obtained from the ecoinvent datasets where these inputs are produced as reference product.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0568493411246851" mu="-2.867350648568055" variance="0.0006" varianceWithPedigreeUncertainty="0.0106"/>
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="9af70e38-0b37-5314-90ce-ed4726626921" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="0.349431100522031" isCalculatedAmount="true" mathematicalRelation="3.27E+11/ PV_sum" intermediateExchangeId="ed65d3d9-349b-4e2c-870c-381209bc1484" activityLinkId="51d44b0f-746e-5891-91e7-4c2e0cc36aae">
+        <name xml:lang="en">transport, passenger car, medium size, diesel, EURO 3</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en">calculated value. Based on the production volume of this exchange divided by the total sum of the  production volumes from all the inputs. The production volumes are obtained from the ecoinvent datasets where these inputs are produced as reference product.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.349431100522031" mu="-1.051448874018399" variance="0.0006" varianceWithPedigreeUncertainty="0.0106"/>
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="592df5ca-aed9-5ba0-98f4-38f3d5659a85" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="0.000191278798145087" isCalculatedAmount="true" mathematicalRelation="1.79E+08/ PV_sum" intermediateExchangeId="ef9d859f-c740-4c1f-8f76-d4faddda1f9f" activityLinkId="7237e18b-cfa9-5e79-bc22-b44b53b031d9">
+        <name xml:lang="en">transport, passenger car, medium size, natural gas, EURO 3</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en">calculated value. Based on the production volume of this exchange divided by the total sum of the  production volumes from all the inputs. The production volumes are obtained from the ecoinvent datasets where these inputs are produced as reference product.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000191278798145087" mu="-8.561778518057036" variance="0.0006" varianceWithPedigreeUncertainty="0.0106"/>
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="5191a829-4b39-59c1-8133-5d58f1325a90" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="0.224405293913231" isCalculatedAmount="true" mathematicalRelation="2.10E+11/ PV_sum" intermediateExchangeId="3bf68190-17bd-4506-84da-3ef2bcb1b624" activityLinkId="31d97ddb-a26e-5110-80ae-9be783e23180">
+        <name xml:lang="en">transport, passenger car, medium size, petrol, EURO 3</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en">calculated value. Based on the production volume of this exchange divided by the total sum of the  production volumes from all the inputs. The production volumes are obtained from the ecoinvent datasets where these inputs are produced as reference product.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.224405293913231" mu="-1.4943015141981835" variance="0.0006" varianceWithPedigreeUncertainty="0.0106"/>
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ac05a6e5-c825-5d39-a5a9-f0bcf59f6ad2" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="0.0224405293913231" isCalculatedAmount="true" mathematicalRelation="2.10E+10/ PV_sum&#13;&#10;" intermediateExchangeId="65e289a5-e378-41e7-9a41-bd51db029439" activityLinkId="efad7ea7-6a84-53ab-a5e5-8b3a514e2367">
+        <name xml:lang="en">transport, passenger car, small size, diesel, EURO 3</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en">calculated value. Based on the production volume of this exchange divided by the total sum of the  production volumes from all the inputs. The production volumes are obtained from the ecoinvent datasets where these inputs are produced as reference product.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0224405293913231" mu="-3.796886607192229" variance="0.0006" varianceWithPedigreeUncertainty="0.0106"/>
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="47f199cf-0c40-5ee4-af29-b8b2c500e3d4" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="0.000741606066551344" isCalculatedAmount="true" mathematicalRelation="6.94E+08/ PV_sum&#13;&#10;" intermediateExchangeId="93d5bc32-a832-4ac1-960a-6705cdfaddc2" activityLinkId="f3bd7c63-7921-580a-91d8-c5a01b739e19">
+        <name xml:lang="en">transport, passenger car, small size, natural gas, EURO 3</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en">calculated value. Based on the production volume of this exchange divided by the total sum of the  production volumes from all the inputs. The production volumes are obtained from the ecoinvent datasets where these inputs are produced as reference product.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000741606066551344" mu="-7.206692363390985" variance="0.0006" varianceWithPedigreeUncertainty="0.0106"/>
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="d5573ab8-1fd1-557c-96f1-0943ff962bfa" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="0.251120209855282" isCalculatedAmount="true" mathematicalRelation="2.35E+11/ PV_sum&#13;&#10;" intermediateExchangeId="2496b794-9414-40bf-8545-5b84925b2f5f" activityLinkId="fc53bfb5-e20c-5389-afe7-8be086483d39">
+        <name xml:lang="en">transport, passenger car, small size, petrol, EURO 3</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en">calculated value. Based on the production volume of this exchange divided by the total sum of the  production volumes from all the inputs. The production volumes are obtained from the ecoinvent datasets where these inputs are produced as reference product.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.251120209855282" mu="-1.3818235307714943" variance="0.0006" varianceWithPedigreeUncertainty="0.0106"/>
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.0" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <parameter parameterId="956a060c-5431-4a98-b5e6-1cf1b04e8b7a" amount="935806800000.0" variableName="PV_sum" mathematicalRelation="5.32E10 + 8.87E10 + 3.38E07 + 2.10E11 + 3.27E11 + 1.79E08 + 2.35E11 + 2.1E10 + 6.94E08&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;" isCalculatedAmount="true" unitId="ae252091-811b-461b-8e89-8f3075639eb1">
+        <name xml:lang="en">production volumes sum</name>
+        <unitName xml:lang="en">km</unitName>
+        <uncertainty>
+          <lognormal meanValue="935806800000.0" mu="27.67" variance="0.0006" varianceWithPedigreeUncertainty="0.0026"/>
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1"/>
+        </uncertainty>
+        <comment xml:lang="en">sum of the production volumes of the input exchanges in the present inventory. Values obtained from the ecoinvent datasets that produce these inputs as reference products.</comment>
+      </parameter>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+      </representativeness>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="14" reviewerId="87296ea5-2149-44c3-8e36-b1256c92666a" reviewerName="Gregor Wernet" reviewerEmail="wernet@ecoinvent.org" reviewDate="2012-08-10">
+        <otherDetails xml:lang="en"/>
+      </review>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="14" reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2012-08-10">
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Consider if it would be better to create this dataset as a child dataset relative to a parent dataset. See the ecoinvent Data Quality Guideline Chapter 4.2 for further advice.
+</otherDetails>
+      </review>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="3" reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2012-11-30">
+        <otherDetails xml:lang="en"/>
+      </review>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="3" reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2012-11-30">
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Consider if it would be better to create this dataset as a child dataset relative to a parent dataset. See the ecoinvent Data Quality Guideline Chapter 4.2 for further advice.
+</otherDetails>
+      </review>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="2" reviewedMinorRevision="2" reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2017-05-26">
+        <details>
+          <text xml:lang="en" index="0">Shares corrected to represent 100%</text>
+        </details>
+        <otherDetails xml:lang="en"/>
+      </review>
+      <review reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="2" reviewedMinorRevision="2" reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2017-05-26">
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'price':
+ - Input='0', Output='0,145'
+ - Input &lt; output by 0,145 EUR2005 (100% of output)
+
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="1b11366d-47b7-40d4-b85d-7d7063b22209" isActiveAuthor="true" personName="Sofia Parada Tur" personEmail="parada@ecoinvent.org"/>
+      <dataGeneratorAndPublication personId="1b11366d-47b7-40d4-b85d-7d7063b22209" personName="Sofia Parada Tur" personEmail="parada@ecoinvent.org" isCopyrightProtected="true" accessRestrictedTo="1"/>
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="3" minorRevision="0" internalSchemaVersion="2.0.8" defaultLanguage="en" creationTimestamp="2012-08-10T14:39:36" lastEditTimestamp="2017-05-26T17:03:46" fileGenerator="EcoEditor 3.8.600.15164" fileTimestamp="2017-05-26T17:03:46" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>
