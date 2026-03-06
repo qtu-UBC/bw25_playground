@@ -5,14 +5,14 @@ bw25_playground - main.py (xlsx + model-level graph)
 
 This script:
   1) Ensures Brightway project exists (assumes you ran your bootstrap for biosphere3 + LCIA methods)
-  2) Imports a foreground system from an Excel sheet (input/lci-carbon-fiber.xlsx, sheet "Carbon fiber")
+  2) Imports foreground systems from all Excel files in input/activity tables
      into database "my_db" (foreground activities defined by "Activity" blocks in the sheet).
   3) Uses a TWO-DB approach for technosphere inputs that are not defined as foreground activities:
         - If ecoinvent-3.10.1-cutoff is installed, try to match inputs to ecoinvent.
         - Otherwise (or if no match), create a stub activity in "external_inputs".
-  4) Runs LCIA for a single model functional unit (ROOT_ACTIVITY_NAME, amount ROOT_ACTIVITY_AMOUNT)
+  4) Runs LCIA for each file's model functional unit(s) (preferred ROOT_ACTIVITY_NAME plus inferred roots),
      for each method listed in input/methods.csv (rows are method tuples: level_1, level_2, level_3).
-  5) Generates ONE model-level supply-chain graph per method (HTML) under output/graphs/.
+  5) Generates model-level supply-chain graphs (HTML) under output/graphs/.
 
 Run:
     uv run python main.py
@@ -28,6 +28,8 @@ import os
 import re
 import glob
 import zipfile
+from datetime import datetime
+import traceback
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Any, Set
 
@@ -51,8 +53,9 @@ FOREGROUND_DB = "my_db"
 EXTERNAL_DB = "external_inputs"
 
 # Excel input
-XLSX_PATH = Path("input") / "lci-carbon-fiber.xlsx"
-XLSX_SHEET = "Carbon fiber"
+XLSX_DIR = Path("input") / "activity tables"
+# If None, use the first sheet in each workbook.
+XLSX_SHEET: Optional[str] = None
 
 # Model root (functional unit)
 ROOT_ACTIVITY_NAME = "carbon fiber production, weaved, at factory"
@@ -64,6 +67,9 @@ METHODS_CSV = Path("input") / "methods.csv"
 # Output
 OUTPUT_DIR = Path("output")
 GRAPHS_DIR = OUTPUT_DIR / "graphs"
+LOGS_DIR = OUTPUT_DIR / "logs"
+BIOSPHERE_SKIP_LOG = LOGS_DIR / "biosphere_skips.log"
+ERROR_LOG = LOGS_DIR / "errors.log"
 
 # Graph settings
 GRAPH_MAX_NODES = 250          # hard cap for readability
@@ -83,8 +89,21 @@ def slugify(s: str) -> str:
     return s or "item"
 
 
+def as_text(value: Any, default: str = "") -> str:
+    """Normalize spreadsheet values to safe strings."""
+    if value is None:
+        return default
+    if isinstance(value, float) and pd.isna(value):
+        return default
+    text = str(value).strip()
+    if not text or text.lower() == "nan":
+        return default
+    return text
+
+
 def ensure_dirs() -> None:
     GRAPHS_DIR.mkdir(parents=True, exist_ok=True)
+    LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def set_project() -> None:
@@ -171,7 +190,7 @@ def try_install_ecoinvent() -> bool:
 # Excel parsing (Activity blocks)
 # ---------------------------
 
-def parse_lci_xlsx(xlsx_path: Path, sheet_name: str) -> Tuple[Dict[str, Dict[str, Any]], List[Dict[str, Any]]]:
+def parse_lci_xlsx(xlsx_path: Path, sheet_name: Optional[str] = None) -> Tuple[Dict[str, Dict[str, Any]], List[Dict[str, Any]]]:
     """
     Returns:
       activities: {activity_name: meta}
@@ -190,7 +209,14 @@ def parse_lci_xlsx(xlsx_path: Path, sheet_name: str) -> Tuple[Dict[str, Dict[str
     if not xlsx_path.exists():
         raise FileNotFoundError(f"Excel file not found: {xlsx_path}")
 
-    df = pd.read_excel(xlsx_path, sheet_name=sheet_name, header=None)
+    if sheet_name is None:
+        df = pd.read_excel(xlsx_path, header=None)
+    else:
+        try:
+            df = pd.read_excel(xlsx_path, sheet_name=sheet_name, header=None)
+        except ValueError:
+            # Fallback to first sheet if the requested sheet is not present.
+            df = pd.read_excel(xlsx_path, header=None)
 
     # Identify activity blocks by "Activity" marker in col 0
     markers = df.index[df[0].astype(str).str.strip().eq("Activity")].tolist()
@@ -217,12 +243,12 @@ def parse_lci_xlsx(xlsx_path: Path, sheet_name: str) -> Tuple[Dict[str, Dict[str
 
         meta = {
             "name": act_name,
-            "comment": find_value(block, "comment"),
-            "source": find_value(block, "source"),
-            "location": str(find_value(block, "location") or "GLO").strip(),
+            "comment": as_text(find_value(block, "comment")),
+            "source": as_text(find_value(block, "source")),
+            "location": as_text(find_value(block, "location"), default="GLO"),
             "production_amount": find_value(block, "production amount"),
-            "reference_product": str(find_value(block, "reference product") or act_name).strip(),
-            "unit": str(find_value(block, "unit") or "unit").strip(),
+            "reference_product": as_text(find_value(block, "reference product"), default=act_name),
+            "unit": as_text(find_value(block, "unit"), default="unit"),
         }
         activities[act_name] = meta
 
@@ -263,11 +289,11 @@ def parse_lci_xlsx(xlsx_path: Path, sheet_name: str) -> Tuple[Dict[str, Dict[str
                     "output_name": act_name,
                     "input_name": in_name,
                     "amount": amount,
-                    "unit": str(r.get("unit", "") or "").strip(),
+                    "unit": as_text(r.get("unit", "")),
                     "type": ex_type,
-                    "database": str(r.get("database", "") or "").strip(),
-                    "location": str(r.get("location", "") or "").strip(),
-                    "reference_product": str(r.get("reference product", "") or "").strip(),
+                    "database": as_text(r.get("database", "")),
+                    "location": as_text(r.get("location", "")),
+                    "reference_product": as_text(r.get("reference product", "")),
                 }
             )
 
@@ -288,7 +314,7 @@ BIOSPHERE_ALIASES = {
 
 def resolve_biosphere_flow(flow_name: str) -> Tuple[str, str]:
     """Resolve a biosphere3 flow by alias, exact match, then contains match (preferring air + fossil)."""
-    flow_name = (flow_name or "").strip()
+    flow_name = as_text(flow_name)
     if flow_name in BIOSPHERE_ALIASES:
         return BIOSPHERE_ALIASES[flow_name]
 
@@ -318,6 +344,18 @@ def resolve_biosphere_flow(flow_name: str) -> Tuple[str, str]:
     return best.key
 
 
+def log_biosphere_skip(message: str) -> None:
+    ts = datetime.now().isoformat(timespec="seconds")
+    with BIOSPHERE_SKIP_LOG.open("a", encoding="utf-8") as f:
+        f.write(f"[{ts}] {message}\n")
+
+
+def log_error(message: str) -> None:
+    ts = datetime.now().isoformat(timespec="seconds")
+    with ERROR_LOG.open("a", encoding="utf-8") as f:
+        f.write(f"[{ts}] {message}\n")
+
+
 # ---------------------------
 # Import to Brightway (two DBs)
 # ---------------------------
@@ -326,6 +364,7 @@ def build_foreground_and_external(
     activities: Dict[str, Dict[str, Any]],
     exchanges: List[Dict[str, Any]],
     bg_index: Optional[Dict[Tuple[str, str, str], Tuple[str, str]]] = None,
+    source_tag: str = "",
 ) -> Tuple[Dict[Tuple[str, str], Dict[str, Any]], Dict[Tuple[str, str], Dict[str, Any]]]:
     """
     Build db_data for:
@@ -348,7 +387,7 @@ def build_foreground_and_external(
             "location": meta.get("location") or "GLO",
             "unit": meta.get("unit") or "unit",
             "reference product": meta.get("reference_product") or name,
-            "comment": meta.get("comment") or "",
+            "comment": as_text(meta.get("comment")),
             "exchanges": [
                 {
                     "input": key,
@@ -395,7 +434,15 @@ def build_foreground_and_external(
 
         # Determine input key
         if ex_type == "biosphere":
-            input_key = resolve_biosphere_flow(in_name)
+            try:
+                input_key = resolve_biosphere_flow(in_name)
+            except ValueError as e:
+                # Fallback: skip unknown biosphere flows and log details for data cleanup.
+                log_biosphere_skip(
+                    f"source={source_tag or 'unknown'} output_activity={ex['output_name']!r} "
+                    f"input_flow={in_name!r} amount={amount} unit={unit!r} reason={e}"
+                )
+                continue
 
         elif ex_type == "technosphere":
             in_code = slugify(in_name)
@@ -495,7 +542,11 @@ def write_databases(fg_data, ext_data) -> None:
         pass
 
     # Then write foreground
-    bd.Database(FOREGROUND_DB).write(fg_data)
+    try:
+        bd.Database(FOREGROUND_DB).write(fg_data)
+    except Exception as e:
+        log_error(f"write_databases_failed error={e!r}\n{traceback.format_exc()}")
+        raise
 
 
 # ---------------------------
@@ -523,6 +574,57 @@ def load_methods_from_csv(path: Path) -> List[Tuple[str, str, str]]:
     return valid
 
 
+def discover_xlsx_files(xlsx_dir: Path) -> List[Path]:
+    if not xlsx_dir.exists():
+        raise FileNotFoundError(f"Input folder not found: {xlsx_dir}")
+    files = sorted(
+        [
+            p
+            for p in xlsx_dir.iterdir()
+            if p.is_file()
+            and p.suffix.lower() == ".xlsx"
+            # Ignore temporary lock files created by Excel, e.g. "~$lci-trucks.xlsx".
+            and not p.name.startswith("~$")
+        ]
+    )
+    if not files:
+        raise FileNotFoundError(f"No .xlsx files found in: {xlsx_dir}")
+    return files
+
+
+def infer_root_activity_names(
+    activities: Dict[str, Dict[str, Any]],
+    exchanges: List[Dict[str, Any]],
+    preferred_name: str,
+) -> List[str]:
+    selected: List[str] = []
+    if preferred_name in activities:
+        selected.append(preferred_name)
+
+    # Candidate roots: activities that are never used as a technosphere input by another foreground activity.
+    tech_inputs = {
+        str(ex.get("input_name") or "").strip()
+        for ex in exchanges
+        if str(ex.get("type") or "").strip().lower() == "technosphere"
+    }
+    roots = [name for name in activities.keys() if name not in tech_inputs]
+    for name in roots:
+        if name not in selected:
+            selected.append(name)
+
+    if selected:
+        if preferred_name not in activities:
+            print(f"     [info] Root '{preferred_name}' not found; inferred {len(selected)} root activity(ies).")
+        elif len(selected) > 1:
+            print(f"     [info] Including multiple roots in one graph: {len(selected)} activities.")
+        return selected
+
+    # Final fallback: first activity in file.
+    fallback = next(iter(activities.keys()))
+    print(f"     [info] Could not infer root from links; using first activity: {fallback!r}")
+    return [fallback]
+
+
 # ---------------------------
 # Model-level graph + LCIA
 # ---------------------------
@@ -540,7 +642,7 @@ def get_activity_by_name(db_name: str, name: str) -> bd.backends.peewee.Activity
     raise ValueError(f"Root activity not found in {db_name}: {name!r}")
 
 
-def build_model_graph_from_foreground(root_key: Tuple[str, str], depth: int = GRAPH_MAX_DEPTH) -> nx.DiGraph:
+def build_model_graph_from_foreground(root_keys: List[Tuple[str, str]], depth: int = GRAPH_MAX_DEPTH) -> nx.DiGraph:
     """
     Build a model-level dependency graph by traversing technosphere exchanges.
     Expands foreground and external nodes; includes background nodes as leaves.
@@ -584,10 +686,10 @@ def build_model_graph_from_foreground(root_key: Tuple[str, str], depth: int = GR
     # Root virtual node
     root_virtual = ("__model__", "root")
     G.add_node(root_virtual, label="MODEL_ROOT", kind="root")
-    add_node(root_key, label=bd.get_activity(root_key).get("name"), kind="foreground")
-    G.add_edge(root_key, root_virtual, label=f"{ROOT_ACTIVITY_AMOUNT:g}", amount=ROOT_ACTIVITY_AMOUNT)
-
-    expand(root_key, 0)
+    for root_key in root_keys:
+        add_node(root_key, label=bd.get_activity(root_key).get("name"), kind="foreground")
+        G.add_edge(root_key, root_virtual, label=f"{ROOT_ACTIVITY_AMOUNT:g}", amount=ROOT_ACTIVITY_AMOUNT)
+        expand(root_key, 0)
 
     # limit size for readability
     if G.number_of_nodes() > GRAPH_MAX_NODES:
@@ -655,14 +757,453 @@ def export_graph_html(G: nx.DiGraph, out_path: Path, title: str) -> None:
     for u, v, attrs in G.edges(data=True):
         # Put amounts/units on hover instead of on-canvas labels (reduces clutter)
         edge_txt = attrs.get("label", "")
-        net.add_edge(str(u), str(v), title=edge_txt)
+        net.add_edge(
+            str(u),
+            str(v),
+            title=edge_txt,
+            amount=abs(float(attrs.get("amount") or 0.0)),
+        )
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     net.write_html(str(out_path), open_browser=False, notebook=False)
+    inject_graph_interactions(out_path)
 
 
-def run_lcia_and_graph(root_act, methods: List[Tuple[str, str, str]]) -> None:
-    demand = {root_act: float(ROOT_ACTIVITY_AMOUNT)}
+def inject_graph_interactions(html_path: Path) -> None:
+    """Add click-to-focus behavior in exported vis.js HTML graphs."""
+    if not html_path.exists():
+        return
+
+    html = html_path.read_text(encoding="utf-8")
+    marker = "</body>"
+    if marker not in html:
+        return
+
+    script = """
+<script type="text/javascript">
+(function () {
+  if (typeof network === "undefined" || typeof nodes === "undefined" || typeof edges === "undefined") {
+    return;
+  }
+
+  var DIM_NODE = "rgba(180, 180, 180, 0.22)";
+  var DIM_EDGE = "rgba(180, 180, 180, 0.16)";
+  var HIGHLIGHT_EDGE = "rgba(226, 88, 34, 0.9)";
+  var HIGHLIGHT_NODE_BG = "rgba(255, 215, 0, 0.35)";
+  var HIGHLIGHT_NODE_BORDER = "rgba(212, 160, 23, 1)";
+  var SHARED_EDGE = "rgba(124, 58, 237, 0.9)";
+  var SHARED_NODE_BG = "rgba(243, 232, 255, 0.95)";
+  var SHARED_NODE_BORDER = "rgba(124, 58, 237, 1)";
+
+  var allNodes = {};
+  var allEdges = {};
+  nodes.get().forEach(function (n) { allNodes[n.id] = n; });
+  edges.get().forEach(function (e) { allEdges[e.id] = e; });
+
+  var maxEdgeAmount = 0;
+  Object.keys(allEdges).forEach(function (id) {
+    var amount = parseFloat(allEdges[id].amount || 0);
+    if (!isNaN(amount) && amount > maxEdgeAmount) {
+      maxEdgeAmount = amount;
+    }
+  });
+
+  var thresholdPct = 0.1;
+  var activeNode = null;
+  var activeMode = "normal"; // normal | focus | shared
+  var sharedButton = null;
+  var sharedListWrap = null;
+  var sharedListBody = null;
+
+  function createSliderUi() {
+    var box = document.createElement("div");
+    box.style.position = "fixed";
+    box.style.top = "14px";
+    box.style.right = "14px";
+    box.style.zIndex = "9999";
+    box.style.background = "rgba(255, 255, 255, 0.96)";
+    box.style.border = "1px solid #d1d5db";
+    box.style.borderRadius = "8px";
+    box.style.padding = "10px 12px";
+    box.style.boxShadow = "0 6px 16px rgba(0, 0, 0, 0.12)";
+    box.style.fontFamily = "Arial, sans-serif";
+    box.style.fontSize = "12px";
+    box.style.color = "#111827";
+    box.style.width = "320px";
+
+    var title = document.createElement("div");
+    title.textContent = "Edge Threshold Filter";
+    title.style.fontWeight = "600";
+    title.style.marginBottom = "6px";
+    box.appendChild(title);
+
+    var val = document.createElement("div");
+    val.id = "edge-threshold-label";
+    val.style.marginBottom = "6px";
+    val.textContent = "Show edges >= 0.1% of max";
+    box.appendChild(val);
+
+    var controls = document.createElement("div");
+    controls.style.display = "flex";
+    controls.style.gap = "8px";
+    controls.style.alignItems = "center";
+    controls.style.width = "100%";
+
+    var slider = document.createElement("input");
+    slider.type = "range";
+    slider.min = "0.1";
+    slider.max = "100";
+    slider.step = "0.1";
+    slider.value = "0.1";
+    slider.style.flex = "1";
+
+    var percentInput = document.createElement("input");
+    percentInput.type = "number";
+    percentInput.min = "0.1";
+    percentInput.max = "100";
+    percentInput.step = "0.1";
+    percentInput.value = "0.1";
+    percentInput.style.width = "74px";
+    percentInput.style.padding = "2px 4px";
+    percentInput.style.border = "1px solid #d1d5db";
+    percentInput.style.borderRadius = "4px";
+    percentInput.title = "Type threshold percent";
+
+    function clampThreshold(raw) {
+      var x = parseFloat(raw);
+      if (isNaN(x)) x = 0.1;
+      if (x < 0.1) x = 0.1;
+      if (x > 100) x = 100;
+      return x;
+    }
+
+    function setThreshold(nextVal) {
+      thresholdPct = clampThreshold(nextVal);
+      slider.value = thresholdPct.toFixed(1);
+      percentInput.value = thresholdPct.toFixed(1);
+      val.textContent = "Show edges >= " + thresholdPct.toFixed(1) + "% of max";
+      applyView();
+    }
+
+    slider.addEventListener("input", function () {
+      setThreshold(slider.value);
+    });
+    percentInput.addEventListener("change", function () {
+      setThreshold(percentInput.value);
+    });
+    percentInput.addEventListener("keyup", function (evt) {
+      if (evt.key === "Enter") {
+        setThreshold(percentInput.value);
+      }
+    });
+
+    controls.appendChild(slider);
+    controls.appendChild(percentInput);
+    box.appendChild(controls);
+
+    var actionRow = document.createElement("div");
+    actionRow.style.marginTop = "8px";
+    actionRow.style.display = "flex";
+    actionRow.style.gap = "8px";
+
+    sharedButton = document.createElement("button");
+    sharedButton.type = "button";
+    sharedButton.textContent = "Highlight Shared Nodes";
+    sharedButton.style.padding = "6px 8px";
+    sharedButton.style.border = "1px solid #9ca3af";
+    sharedButton.style.borderRadius = "6px";
+    sharedButton.style.background = "#f9fafb";
+    sharedButton.style.cursor = "pointer";
+    sharedButton.addEventListener("click", function () {
+      if (activeMode === "shared") {
+        activeMode = "normal";
+        sharedButton.textContent = "Highlight Shared Nodes";
+      } else {
+        activeMode = "shared";
+        activeNode = null;
+        sharedButton.textContent = "Clear Shared Highlight";
+      }
+      applyView();
+    });
+    actionRow.appendChild(sharedButton);
+    box.appendChild(actionRow);
+
+    sharedListWrap = document.createElement("div");
+    sharedListWrap.style.marginTop = "8px";
+    sharedListWrap.style.display = "none";
+
+    var sharedTitle = document.createElement("div");
+    sharedTitle.textContent = "Shared Nodes";
+    sharedTitle.style.fontWeight = "600";
+    sharedTitle.style.marginBottom = "4px";
+    sharedListWrap.appendChild(sharedTitle);
+
+    var tableWrap = document.createElement("div");
+    tableWrap.style.maxHeight = "220px";
+    tableWrap.style.overflowY = "auto";
+    tableWrap.style.border = "1px solid #e5e7eb";
+    tableWrap.style.borderRadius = "6px";
+
+    var table = document.createElement("table");
+    table.style.width = "100%";
+    table.style.borderCollapse = "collapse";
+    table.style.fontSize = "11px";
+
+    var thead = document.createElement("thead");
+    var hr = document.createElement("tr");
+    var h1 = document.createElement("th");
+    h1.textContent = "#";
+    h1.style.textAlign = "left";
+    h1.style.padding = "4px 6px";
+    h1.style.position = "sticky";
+    h1.style.top = "0";
+    h1.style.background = "#f9fafb";
+    var h2 = document.createElement("th");
+    h2.textContent = "Name";
+    h2.style.textAlign = "left";
+    h2.style.padding = "4px 6px";
+    h2.style.position = "sticky";
+    h2.style.top = "0";
+    h2.style.background = "#f9fafb";
+    hr.appendChild(h1);
+    hr.appendChild(h2);
+    thead.appendChild(hr);
+    table.appendChild(thead);
+
+    sharedListBody = document.createElement("tbody");
+    table.appendChild(sharedListBody);
+    tableWrap.appendChild(table);
+    sharedListWrap.appendChild(tableWrap);
+    box.appendChild(sharedListWrap);
+
+    var help = document.createElement("div");
+    help.style.marginTop = "6px";
+    help.style.color = "#4b5563";
+    help.textContent = "Click a node to focus its path. Click empty area to reset.";
+    box.appendChild(help);
+
+    document.body.appendChild(box);
+  }
+
+  function neighbors(nodeId, direction) {
+    var keep = new Set([nodeId]);
+    var stack = [nodeId];
+    while (stack.length > 0) {
+      var cur = stack.pop();
+      var edgeIds = network.getConnectedEdges(cur);
+      for (var i = 0; i < edgeIds.length; i++) {
+        var e = allEdges[edgeIds[i]];
+        if (!e || !edgePassThreshold(e)) continue;
+        var next = null;
+        if (direction === "upstream" && e.to === cur) next = e.from;
+        if (direction === "downstream" && e.from === cur) next = e.to;
+        if (next !== null && !keep.has(next)) {
+          keep.add(next);
+          stack.push(next);
+        }
+      }
+    }
+    return keep;
+  }
+
+  function edgePassThreshold(edge) {
+    if (maxEdgeAmount <= 0) return true;
+    var amount = parseFloat(edge.amount || 0);
+    if (isNaN(amount)) amount = 0;
+    return amount >= (thresholdPct / 100) * maxEdgeAmount;
+  }
+
+  function focusedNodeSet(nodeId) {
+    if (!nodeId) return null;
+    var up = neighbors(nodeId, "upstream");
+    var down = neighbors(nodeId, "downstream");
+    var keep = new Set();
+    up.forEach(function (x) { keep.add(x); });
+    down.forEach(function (x) { keep.add(x); });
+    return keep;
+  }
+
+  function sharedNodeSet() {
+    var rootNodeId = null;
+    Object.keys(allNodes).forEach(function (id) {
+      var n = allNodes[id];
+      if (n && n.label === "MODEL_ROOT") {
+        rootNodeId = n.id;
+      }
+    });
+    if (!rootNodeId) return null;
+
+    var finalProducts = [];
+    Object.keys(allEdges).forEach(function (id) {
+      var e = allEdges[id];
+      if (!e || !edgePassThreshold(e)) return;
+      if (e.to === rootNodeId) {
+        finalProducts.push(e.from);
+      }
+    });
+    if (finalProducts.length === 0) return null;
+
+    var shared = null;
+    for (var i = 0; i < finalProducts.length; i++) {
+      var chain = neighbors(finalProducts[i], "upstream");
+      if (shared === null) {
+        shared = new Set(chain);
+      } else {
+        shared = new Set(Array.from(shared).filter(function (x) { return chain.has(x); }));
+      }
+    }
+    return shared;
+  }
+
+  function updateSharedList(keep) {
+    if (!sharedListWrap || !sharedListBody) return;
+
+    if (activeMode !== "shared") {
+      sharedListWrap.style.display = "none";
+      sharedListBody.innerHTML = "";
+      return;
+    }
+
+    sharedListWrap.style.display = "block";
+    sharedListBody.innerHTML = "";
+
+    if (!keep || keep.size === 0) {
+      var emptyRow = document.createElement("tr");
+      var emptyCell = document.createElement("td");
+      emptyCell.colSpan = 2;
+      emptyCell.textContent = "No shared nodes at current threshold.";
+      emptyCell.style.padding = "6px";
+      emptyCell.style.color = "#6b7280";
+      emptyCell.style.borderTop = "1px solid #f3f4f6";
+      emptyRow.appendChild(emptyCell);
+      sharedListBody.appendChild(emptyRow);
+      return;
+    }
+
+    var names = Array.from(keep).map(function (id) {
+      var n = allNodes[id];
+      if (!n) return String(id);
+      var full = (n.title || n.label || String(id));
+      return String(full);
+    }).sort(function (a, b) {
+      return a.localeCompare(b);
+    });
+
+    for (var i = 0; i < names.length; i++) {
+      var tr = document.createElement("tr");
+      var c1 = document.createElement("td");
+      c1.textContent = String(i + 1);
+      c1.style.padding = "4px 6px";
+      c1.style.borderTop = "1px solid #f3f4f6";
+      c1.style.verticalAlign = "top";
+
+      var c2 = document.createElement("td");
+      c2.textContent = names[i];
+      c2.style.padding = "4px 6px";
+      c2.style.borderTop = "1px solid #f3f4f6";
+      c2.style.verticalAlign = "top";
+      c2.style.wordBreak = "break-word";
+
+      tr.appendChild(c1);
+      tr.appendChild(c2);
+      sharedListBody.appendChild(tr);
+    }
+  }
+
+  function applyView() {
+    var keep = null;
+    if (activeMode === "shared") {
+      keep = sharedNodeSet();
+    } else if (activeMode === "focus") {
+      keep = focusedNodeSet(activeNode);
+    }
+
+    var nodeBg = activeMode === "shared" ? SHARED_NODE_BG : HIGHLIGHT_NODE_BG;
+    var nodeBorder = activeMode === "shared" ? SHARED_NODE_BORDER : HIGHLIGHT_NODE_BORDER;
+    var edgeColor = activeMode === "shared" ? SHARED_EDGE : HIGHLIGHT_EDGE;
+
+    var nodeUpdates = [];
+    Object.keys(allNodes).forEach(function (id) {
+      var original = allNodes[id];
+      if (!keep) {
+        nodeUpdates.push({
+          id: original.id,
+          color: original.color,
+          font: original.font,
+          hidden: original.hidden || false
+        });
+      } else if (keep.has(original.id)) {
+        nodeUpdates.push({
+          id: original.id,
+          color: {
+            background: nodeBg,
+            border: nodeBorder,
+            highlight: { background: nodeBg, border: nodeBorder }
+          },
+          font: { color: "#1f2937" },
+          hidden: false
+        });
+      } else {
+        nodeUpdates.push({
+          id: original.id,
+          color: {
+            background: DIM_NODE,
+            border: DIM_NODE,
+            highlight: { background: DIM_NODE, border: DIM_NODE }
+          },
+          font: { color: "rgba(110, 110, 110, 0.45)" },
+          hidden: false
+        });
+      }
+    });
+
+    var edgeUpdates = [];
+    Object.keys(allEdges).forEach(function (id) {
+      var original = allEdges[id];
+      var passThreshold = edgePassThreshold(original);
+      var onPath = !keep || (keep.has(original.from) && keep.has(original.to));
+      var visible = passThreshold && onPath;
+      edgeUpdates.push({
+        id: original.id,
+        hidden: !visible,
+        color: keep ? (visible ? edgeColor : DIM_EDGE) : original.color,
+        width: keep ? (visible ? 2.2 : 1) : (original.width || 1)
+      });
+    });
+
+    nodes.update(nodeUpdates);
+    edges.update(edgeUpdates);
+    updateSharedList(keep);
+  }
+
+  createSliderUi();
+  applyView();
+
+  network.on("click", function (params) {
+    if (!params.nodes || params.nodes.length === 0) {
+      activeMode = "normal";
+      activeNode = null;
+      if (sharedButton) sharedButton.textContent = "Highlight Shared Nodes";
+      applyView();
+      return;
+    }
+    activeMode = "focus";
+    activeNode = params.nodes[0];
+    if (sharedButton) sharedButton.textContent = "Highlight Shared Nodes";
+    applyView();
+  });
+})();
+</script>
+"""
+
+    html = html.replace(marker, script + "\n" + marker)
+    html_path.write_text(html, encoding="utf-8")
+
+
+def run_lcia_and_graph(root_acts, root_names: List[str], source_tag: str, methods: List[Tuple[str, str, str]]) -> None:
+    demand = {act: float(ROOT_ACTIVITY_AMOUNT) for act in root_acts}
+    graph_root_keys = [act.key for act in root_acts]
+    roots_label = ", ".join(root_names)
 
     for method in methods:
         lca = bc.LCA(demand, method)
@@ -671,13 +1212,14 @@ def run_lcia_and_graph(root_act, methods: List[Tuple[str, str, str]]) -> None:
         score = float(lca.score)
 
         # Graph (model-level)
-        G = build_model_graph_from_foreground(root_act.key, depth=GRAPH_MAX_DEPTH)
+        G = build_model_graph_from_foreground(graph_root_keys, depth=GRAPH_MAX_DEPTH)
 
         safe_method = "__".join([slugify(x) for x in method])
-        safe_root = slugify(ROOT_ACTIVITY_NAME)
-        out_html = GRAPHS_DIR / f"{safe_root}__{safe_method}__graph.html"
+        safe_root = "multi_root" if len(root_names) > 1 else slugify(root_names[0])
+        safe_source = slugify(source_tag)
+        out_html = GRAPHS_DIR / f"{safe_source}__{safe_root}__{safe_method}__graph.html"
 
-        export_graph_html(G, out_html, title=f"{ROOT_ACTIVITY_NAME} | {method} | score={score:g}")
+        export_graph_html(G, out_html, title=f"{source_tag} | {roots_label} | {method} | score={score:g}")
         print(f"     ✓ {method} score={score:g} -> {out_html}")
 
 
@@ -716,30 +1258,44 @@ def main() -> None:
     has_ei = try_install_ecoinvent()
     bg_index = build_ecoinvent_index() if has_ei else None
 
-    print("[2/5] Parse Excel + build DBs")
-    activities, exchanges = parse_lci_xlsx(XLSX_PATH, XLSX_SHEET)
-    print(f"     ✓ Parsed {len(activities)} activities and {len(exchanges)} exchanges from {XLSX_PATH}")
+    print("[2/5] Discover input Excel files")
+    xlsx_files = discover_xlsx_files(XLSX_DIR)
+    print(f"     ✓ Found {len(xlsx_files)} file(s) in {XLSX_DIR}")
 
-    # Ensure biosphere exists if biosphere exchanges are present
-    if any(str(ex.get("type", "")).strip().lower() == "biosphere" for ex in exchanges):
-        if "biosphere3" not in bd.databases or len(list(bd.Database("biosphere3"))) == 0:
-            raise RuntimeError("biosphere3 missing/empty. Run your bootstrap first (biosphere3 + LCIA methods).")
-
-    fg_data, ext_data = build_foreground_and_external(activities, exchanges, bg_index=bg_index)
-    print(f"     ✓ Foreground datasets: {len(fg_data)}")
-    print(f"     ✓ External stub datasets: {len(ext_data)}")
-
-    print("[3/5] Write databases")
-    write_databases(fg_data, ext_data)
-    print(f"     ✓ Wrote '{FOREGROUND_DB}' and '{EXTERNAL_DB}'")
-
-    print("[4/5] Load methods + run LCIA")
+    print("[3/5] Load methods")
     methods = load_methods_from_csv(METHODS_CSV)
     # Optional quick datapackage sanity check for the first method
     sanity_check_method_datapackages(methods[0])
 
-    root_act = get_activity_by_name(FOREGROUND_DB, ROOT_ACTIVITY_NAME)
-    run_lcia_and_graph(root_act, methods)
+    print("[4/5] Build DBs + run LCIA/graphs for each file")
+    log_biosphere_skip("=== New run started ===")
+    log_error("=== New run started ===")
+    for xlsx_path in xlsx_files:
+        source_tag = xlsx_path.stem
+        print(f"     -> Processing: {xlsx_path}")
+        activities, exchanges = parse_lci_xlsx(xlsx_path, XLSX_SHEET)
+        print(f"        ✓ Parsed {len(activities)} activities and {len(exchanges)} exchanges")
+
+        # Ensure biosphere exists if biosphere exchanges are present
+        if any(str(ex.get("type", "")).strip().lower() == "biosphere" for ex in exchanges):
+            if "biosphere3" not in bd.databases or len(list(bd.Database("biosphere3"))) == 0:
+                raise RuntimeError("biosphere3 missing/empty. Run your bootstrap first (biosphere3 + LCIA methods).")
+
+        fg_data, ext_data = build_foreground_and_external(
+            activities,
+            exchanges,
+            bg_index=bg_index,
+            source_tag=source_tag,
+        )
+        print(f"        ✓ Foreground datasets: {len(fg_data)}")
+        print(f"        ✓ External stub datasets: {len(ext_data)}")
+
+        write_databases(fg_data, ext_data)
+        print(f"        ✓ Wrote '{FOREGROUND_DB}' and '{EXTERNAL_DB}'")
+
+        root_names = infer_root_activity_names(activities, exchanges, ROOT_ACTIVITY_NAME)
+        root_acts = [get_activity_by_name(FOREGROUND_DB, name) for name in root_names]
+        run_lcia_and_graph(root_acts, root_names=root_names, source_tag=source_tag, methods=methods)
 
     print("[5/5] Done")
     print(f"     ✓ Graphs saved to: {GRAPHS_DIR}/")
