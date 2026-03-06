@@ -34,6 +34,7 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Any, Set
 
 import pandas as pd
+import numpy as np
 import networkx as nx
 from pyvis.network import Network
 
@@ -743,6 +744,11 @@ def export_graph_html(G: nx.DiGraph, out_path: Path, title: str) -> None:
         s = " ".join(s.split())
         return s if len(s) <= max_len else s[: max_len - 1] + "…"
 
+    def fmt(v: Optional[float]) -> str:
+        if v is None:
+            return "n/a"
+        return f"{v:.6g}"
+
     for key, attrs in G.nodes(data=True):
         full = attrs.get("label") or f"{key[0]}::{key[1]}"
         kind = attrs.get("kind", "node")
@@ -757,11 +763,16 @@ def export_graph_html(G: nx.DiGraph, out_path: Path, title: str) -> None:
     for u, v, attrs in G.edges(data=True):
         # Put amounts/units on hover instead of on-canvas labels (reduces clutter)
         edge_txt = attrs.get("label", "")
+        impact_val = attrs.get("impact_value")
+        impact_txt = f"impact contribution: {fmt(impact_val)}"
         net.add_edge(
             str(u),
             str(v),
             title=edge_txt,
+            exchange_title=edge_txt,
+            impact_title=impact_txt,
             amount=abs(float(attrs.get("amount") or 0.0)),
+            impact_value=float(impact_val) if impact_val is not None else 0.0,
         )
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -802,6 +813,7 @@ def inject_graph_interactions(html_path: Path) -> None:
   var DIM_NODE = "rgba(180, 180, 180, 0.22)";
   var DIM_EDGE = "rgba(180, 180, 180, 0.16)";
   var HIGHLIGHT_EDGE = "rgba(226, 88, 34, 0.9)";
+  var IMPACT_HIGHLIGHT_EDGE = "rgba(0, 0, 0, 0.95)";
   var HIGHLIGHT_NODE_BG = "rgba(255, 215, 0, 0.35)";
   var HIGHLIGHT_NODE_BORDER = "rgba(212, 160, 23, 1)";
   var SHARED_EDGE = "rgba(124, 58, 237, 0.9)";
@@ -814,10 +826,15 @@ def inject_graph_interactions(html_path: Path) -> None:
   edges.get().forEach(function (e) { allEdges[e.id] = e; });
 
   var maxEdgeAmount = 0;
+  var maxEdgeImpact = 0;
   Object.keys(allEdges).forEach(function (id) {
     var amount = parseFloat(allEdges[id].amount || 0);
     if (!isNaN(amount) && amount > maxEdgeAmount) {
       maxEdgeAmount = amount;
+    }
+    var impact = Math.abs(parseFloat(allEdges[id].impact_value || 0));
+    if (!isNaN(impact) && impact > maxEdgeImpact) {
+      maxEdgeImpact = impact;
     }
   });
 
@@ -825,6 +842,7 @@ def inject_graph_interactions(html_path: Path) -> None:
   var activeNode = null;
   var activeMode = "normal"; // normal | focus | shared
   var sharedButton = null;
+  var edgeValueMode = "exchange"; // exchange | impact
   var sharedListWrap = null;
   var sharedListBody = null;
 
@@ -853,7 +871,7 @@ def inject_graph_interactions(html_path: Path) -> None:
     var val = document.createElement("div");
     val.id = "edge-threshold-label";
     val.style.marginBottom = "6px";
-    val.textContent = "Show edges >= 0.1% of max";
+    val.textContent = "Show edges >= 0.1% of max exchange";
     box.appendChild(val);
 
     var controls = document.createElement("div");
@@ -894,7 +912,8 @@ def inject_graph_interactions(html_path: Path) -> None:
       thresholdPct = clampThreshold(nextVal);
       slider.value = thresholdPct.toFixed(1);
       percentInput.value = thresholdPct.toFixed(1);
-      val.textContent = "Show edges >= " + thresholdPct.toFixed(1) + "% of max";
+      var basis = edgeValueMode === "impact" ? "impact" : "exchange";
+      val.textContent = "Show edges >= " + thresholdPct.toFixed(1) + "% of max " + basis;
       applyView();
     }
 
@@ -918,6 +937,7 @@ def inject_graph_interactions(html_path: Path) -> None:
     actionRow.style.marginTop = "8px";
     actionRow.style.display = "flex";
     actionRow.style.gap = "8px";
+    actionRow.style.flexWrap = "wrap";
 
     sharedButton = document.createElement("button");
     sharedButton.type = "button";
@@ -939,6 +959,38 @@ def inject_graph_interactions(html_path: Path) -> None:
       applyView();
     });
     actionRow.appendChild(sharedButton);
+
+    var modeWrap = document.createElement("div");
+    modeWrap.style.display = "flex";
+    modeWrap.style.alignItems = "center";
+    modeWrap.style.gap = "4px";
+
+    var modeLabel = document.createElement("span");
+    modeLabel.textContent = "Edge value:";
+    modeLabel.style.color = "#374151";
+    modeWrap.appendChild(modeLabel);
+
+    var modeSelect = document.createElement("select");
+    modeSelect.style.border = "1px solid #d1d5db";
+    modeSelect.style.borderRadius = "6px";
+    modeSelect.style.padding = "4px";
+    var optExchange = document.createElement("option");
+    optExchange.value = "exchange";
+    optExchange.textContent = "Exchange";
+    var optImpact = document.createElement("option");
+    optImpact.value = "impact";
+    optImpact.textContent = "Impact";
+    modeSelect.appendChild(optExchange);
+    modeSelect.appendChild(optImpact);
+    modeSelect.value = edgeValueMode;
+    modeSelect.addEventListener("change", function () {
+      edgeValueMode = modeSelect.value;
+      var basis = edgeValueMode === "impact" ? "impact" : "exchange";
+      val.textContent = "Show edges >= " + thresholdPct.toFixed(1) + "% of max " + basis;
+      applyView();
+    });
+    modeWrap.appendChild(modeSelect);
+    actionRow.appendChild(modeWrap);
     box.appendChild(actionRow);
 
     sharedListWrap = document.createElement("div");
@@ -1020,10 +1072,19 @@ def inject_graph_interactions(html_path: Path) -> None:
   }
 
   function edgePassThreshold(edge) {
-    if (maxEdgeAmount <= 0) return true;
-    var amount = parseFloat(edge.amount || 0);
-    if (isNaN(amount)) amount = 0;
-    return amount >= (thresholdPct / 100) * maxEdgeAmount;
+    var value = 0;
+    var maxValue = 0;
+    if (edgeValueMode === "impact") {
+      value = Math.abs(parseFloat(edge.impact_value || 0));
+      if (isNaN(value)) value = 0;
+      maxValue = maxEdgeImpact;
+    } else {
+      value = parseFloat(edge.amount || 0);
+      if (isNaN(value)) value = 0;
+      maxValue = maxEdgeAmount;
+    }
+    if (maxValue <= 0) return true;
+    return value >= (thresholdPct / 100) * maxValue;
   }
 
   function focusedNodeSet(nodeId) {
@@ -1134,6 +1195,9 @@ def inject_graph_interactions(html_path: Path) -> None:
     var nodeBg = activeMode === "shared" ? SHARED_NODE_BG : HIGHLIGHT_NODE_BG;
     var nodeBorder = activeMode === "shared" ? SHARED_NODE_BORDER : HIGHLIGHT_NODE_BORDER;
     var edgeColor = activeMode === "shared" ? SHARED_EDGE : HIGHLIGHT_EDGE;
+    if (edgeValueMode === "impact") {
+      edgeColor = IMPACT_HIGHLIGHT_EDGE;
+    }
 
     var nodeUpdates = [];
     Object.keys(allNodes).forEach(function (id) {
@@ -1176,11 +1240,15 @@ def inject_graph_interactions(html_path: Path) -> None:
       var passThreshold = edgePassThreshold(original);
       var onPath = !keep || (keep.has(original.from) && keep.has(original.to));
       var visible = passThreshold && onPath;
+      var titleText = edgeValueMode === "impact"
+        ? (original.impact_title || original.title || "")
+        : (original.exchange_title || original.title || "");
       edgeUpdates.push({
         id: original.id,
         hidden: !visible,
         color: keep ? (visible ? edgeColor : DIM_EDGE) : original.color,
-        width: keep ? (visible ? 2.2 : 1) : (original.width || 1)
+        width: keep ? (visible ? 2.2 : 1) : (original.width || 1),
+        title: titleText
       });
     });
 
@@ -1224,6 +1292,7 @@ def run_lcia_and_graph(root_acts, root_names: List[str], source_tag: str, method
 
         # Graph (model-level)
         G = build_model_graph_from_foreground(graph_root_keys, depth=GRAPH_MAX_DEPTH)
+        annotate_graph_with_edge_impacts(G, lca)
 
         safe_method = "__".join([slugify(x) for x in method])
         safe_root = "multi_root" if len(root_names) > 1 else slugify(root_names[0])
@@ -1233,6 +1302,60 @@ def run_lcia_and_graph(root_acts, root_names: List[str], source_tag: str, method
         impact_name = method[2] if len(method) >= 3 else " / ".join(method)
         export_graph_html(G, out_html, title=f"{source_tag} | {impact_name}")
         print(f"     ✓ {method} score={score:g} -> {out_html}")
+
+
+def annotate_graph_with_edge_impacts(G: nx.DiGraph, lca: bc.LCA) -> None:
+    """
+    Add a simple edge-level impact contribution estimate to graph edges.
+
+    Approach:
+    1) Compute direct characterized impact per activity from characterized inventory columns.
+    2) Allocate each input activity's direct impact to outgoing graph edges in proportion to
+       (exchange amount * consumer supply) / producer supply.
+    """
+    try:
+        by_activity = np.asarray(lca.characterized_inventory.sum(axis=0)).ravel()
+    except Exception:
+        return
+
+    supply = np.asarray(lca.supply_array).ravel()
+    if by_activity.size == 0 or supply.size == 0:
+        return
+
+    activity_index = lca.dicts.activity
+    direct_by_key: Dict[Tuple[str, str], float] = {}
+    supply_by_key: Dict[Tuple[str, str], float] = {}
+
+    for node in G.nodes:
+        if not isinstance(node, tuple) or node[0] == "__model__":
+            continue
+        try:
+            act = bd.get_activity(node)
+            idx = activity_index[act.id]
+            direct_by_key[node] = float(by_activity[idx])
+            supply_by_key[node] = abs(float(supply[idx]))
+        except Exception:
+            continue
+
+    for u, v, attrs in G.edges(data=True):
+        if not (isinstance(u, tuple) and isinstance(v, tuple)):
+            attrs["impact_value"] = None
+            continue
+        if u[0] == "__model__" or v[0] == "__model__":
+            attrs["impact_value"] = None
+            continue
+
+        direct_u = direct_by_key.get(u)
+        supply_u = supply_by_key.get(u, 0.0)
+        supply_v = supply_by_key.get(v, 0.0)
+        ex_amt = abs(float(attrs.get("amount") or 0.0))
+        if direct_u is None or supply_u <= 0.0:
+            attrs["impact_value"] = None
+            continue
+
+        required = ex_amt * supply_v
+        share = (required / supply_u) if supply_u > 0 else 0.0
+        attrs["impact_value"] = direct_u * share
 
 
 def sanity_check_method_datapackages(method: Tuple[str, str, str]) -> None:
@@ -1253,6 +1376,53 @@ def sanity_check_method_datapackages(method: Tuple[str, str, str]) -> None:
                     raise RuntimeError(f"Corrupt method archive: {p}")
         except zipfile.BadZipFile as e:
             raise RuntimeError(f"Bad zip for method: {p}") from e
+
+
+def validate_lcia_ready(demand: Dict[Any, float], methods: List[Tuple[str, str, str]], checks: int = 3) -> None:
+    """
+    Fail fast if LCIA methods appear unlinked to biosphere flows in the current project.
+
+    This catches a common broken-bootstrap state where methods exist, but
+    characterization factors don't match the active biosphere identifiers.
+    """
+    if not methods:
+        raise RuntimeError("No LCIA methods provided for validation.")
+
+    to_check = methods[: max(1, min(checks, len(methods)))]
+    last_error: Optional[Exception] = None
+
+    for method in to_check:
+        try:
+            method_data = bd.Method(method).load()
+            method_ids: Set[int] = set()
+            for flow_key, _ in method_data:
+                if isinstance(flow_key, int):
+                    method_ids.add(flow_key)
+                elif isinstance(flow_key, (tuple, list)) and len(flow_key) == 2:
+                    try:
+                        method_ids.add(bd.get_node(database=flow_key[0], code=flow_key[1]).id)
+                    except Exception:
+                        pass
+
+            lca = bc.LCA(demand, method)
+            lca.lci()
+            lca.lcia()
+
+            biosphere_ids = set(lca.dicts.biosphere.reversed.values())
+            overlap = len(method_ids & biosphere_ids)
+            char_nnz = int((lca.characterization_matrix != 0).sum())
+            if overlap > 0 and char_nnz > 0:
+                return
+        except Exception as e:
+            last_error = e
+
+    detail = f" Last error: {last_error!r}" if last_error else ""
+    raise RuntimeError(
+        "LCIA methods appear unlinked or empty for this project/model "
+        "(zero overlap with biosphere characterization factors). "
+        "Recommended fix: rebuild project bootstrap (biosphere3 + default methods) "
+        "using a known-good Brightway setup, then rerun main.py." + detail
+    )
 
 
 # ---------------------------
@@ -1307,6 +1477,8 @@ def main() -> None:
 
         root_names = infer_root_activity_names(activities, exchanges, ROOT_ACTIVITY_NAME)
         root_acts = [get_activity_by_name(FOREGROUND_DB, name) for name in root_names]
+        demand = {act: float(ROOT_ACTIVITY_AMOUNT) for act in root_acts}
+        validate_lcia_ready(demand, methods)
         run_lcia_and_graph(root_acts, root_names=root_names, source_tag=source_tag, methods=methods)
 
     print("[5/5] Done")

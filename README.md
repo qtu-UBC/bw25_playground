@@ -37,6 +37,7 @@ This repo is set up to:
 
 ```bash
 uv sync
+uv run python scripts/bootstrap_bw.py
 ```
 
 ### Configure ecoinvent (optional, recommended)
@@ -54,6 +55,19 @@ EOF
 
 If ecoinvent is not configured, the script will still run, but unmatched inputs will be stubbed into `external_inputs`.
 
+### Brightway bootstrap
+
+`scripts/bootstrap_bw.py` is the reproducible project bootstrap for this repo. It:
+- ensures `biosphere3` exists
+- installs default LCIA methods (with compatibility handling for the current pinned stack)
+- runs an LCIA sanity check (non-zero characterization linkage)
+
+Run it whenever you create a fresh Brightway project or suspect broken method linkage:
+
+```bash
+uv run python scripts/bootstrap_bw.py
+```
+
 ---
 
 ## Run
@@ -62,9 +76,7 @@ If ecoinvent is not configured, the script will still run, but unmatched inputs 
 uv run python main.py
 ```
 
-On the first run in a fresh Brightway project, it will ensure:
-- `biosphere3` exists
-- LCIA methods are installed (you should see hundreds of methods)
+On the first run in a project that has been bootstrapped, it will:
 
 Then it will:
 1) check/import ecoinvent (if configured and not already installed)
@@ -156,6 +168,19 @@ Install Jinja2 and ensure HTML export uses `write_html` (not notebook mode):
 
 ```bash
 uv pip install jinja2
+```
+
+### LCIA scores are all zero
+Run project bootstrap again:
+
+```bash
+uv run python scripts/bootstrap_bw.py
+```
+
+Then rerun:
+
+```bash
+uv run python main.py
 ```
 
 ---
