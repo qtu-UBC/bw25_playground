@@ -775,6 +775,19 @@ def inject_graph_interactions(html_path: Path) -> None:
         return
 
     html = html_path.read_text(encoding="utf-8")
+    # PyVis template can render duplicate centered <h1> blocks; keep only the first.
+    heading_blocks = list(re.finditer(r"<center>\s*<h1>.*?</h1>\s*</center>", html, flags=re.DOTALL))
+    if len(heading_blocks) > 1:
+        rebuilt = []
+        last = 0
+        for i, m in enumerate(heading_blocks):
+            rebuilt.append(html[last:m.start()])
+            if i == 0:
+                rebuilt.append(m.group(0))
+            last = m.end()
+        rebuilt.append(html[last:])
+        html = "".join(rebuilt)
+
     marker = "</body>"
     if marker not in html:
         return
@@ -1203,8 +1216,6 @@ def inject_graph_interactions(html_path: Path) -> None:
 def run_lcia_and_graph(root_acts, root_names: List[str], source_tag: str, methods: List[Tuple[str, str, str]]) -> None:
     demand = {act: float(ROOT_ACTIVITY_AMOUNT) for act in root_acts}
     graph_root_keys = [act.key for act in root_acts]
-    roots_label = ", ".join(root_names)
-
     for method in methods:
         lca = bc.LCA(demand, method)
         lca.lci()
@@ -1219,7 +1230,8 @@ def run_lcia_and_graph(root_acts, root_names: List[str], source_tag: str, method
         safe_source = slugify(source_tag)
         out_html = GRAPHS_DIR / f"{safe_source}__{safe_root}__{safe_method}__graph.html"
 
-        export_graph_html(G, out_html, title=f"{source_tag} | {roots_label} | {method} | score={score:g}")
+        impact_name = method[2] if len(method) >= 3 else " / ".join(method)
+        export_graph_html(G, out_html, title=f"{source_tag} | {impact_name}")
         print(f"     ✓ {method} score={score:g} -> {out_html}")
 
 
