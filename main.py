@@ -1050,7 +1050,8 @@ def inject_graph_interactions(html_path: Path) -> None:
     document.body.appendChild(box);
   }
 
-  function neighbors(nodeId, direction) {
+  function neighbors(nodeId, direction, applyThreshold) {
+    if (applyThreshold === undefined) applyThreshold = true;
     var keep = new Set([nodeId]);
     var stack = [nodeId];
     while (stack.length > 0) {
@@ -1058,7 +1059,8 @@ def inject_graph_interactions(html_path: Path) -> None:
       var edgeIds = network.getConnectedEdges(cur);
       for (var i = 0; i < edgeIds.length; i++) {
         var e = allEdges[edgeIds[i]];
-        if (!e || !edgePassThreshold(e)) continue;
+        if (!e) continue;
+        if (applyThreshold && !edgePassThreshold(e)) continue;
         var next = null;
         if (direction === "upstream" && e.to === cur) next = e.from;
         if (direction === "downstream" && e.from === cur) next = e.to;
@@ -1089,15 +1091,16 @@ def inject_graph_interactions(html_path: Path) -> None:
 
   function focusedNodeSet(nodeId) {
     if (!nodeId) return null;
-    var up = neighbors(nodeId, "upstream");
-    var down = neighbors(nodeId, "downstream");
+    var up = neighbors(nodeId, "upstream", true);
+    var down = neighbors(nodeId, "downstream", true);
     var keep = new Set();
     up.forEach(function (x) { keep.add(x); });
     down.forEach(function (x) { keep.add(x); });
     return keep;
   }
 
-  function sharedNodeSet() {
+  function sharedNodeSet(applyThreshold) {
+    if (applyThreshold === undefined) applyThreshold = true;
     var rootNodeId = null;
     Object.keys(allNodes).forEach(function (id) {
       var n = allNodes[id];
@@ -1110,7 +1113,8 @@ def inject_graph_interactions(html_path: Path) -> None:
     var finalProducts = [];
     Object.keys(allEdges).forEach(function (id) {
       var e = allEdges[id];
-      if (!e || !edgePassThreshold(e)) return;
+      if (!e) return;
+      if (applyThreshold && !edgePassThreshold(e)) return;
       if (e.to === rootNodeId) {
         finalProducts.push(e.from);
       }
@@ -1119,7 +1123,7 @@ def inject_graph_interactions(html_path: Path) -> None:
 
     var shared = null;
     for (var i = 0; i < finalProducts.length; i++) {
-      var chain = neighbors(finalProducts[i], "upstream");
+      var chain = neighbors(finalProducts[i], "upstream", applyThreshold);
       if (shared === null) {
         shared = new Set(chain);
       } else {
@@ -1129,7 +1133,7 @@ def inject_graph_interactions(html_path: Path) -> None:
     return shared;
   }
 
-  function updateSharedList(keep) {
+  function updateSharedList(allShared, visibleShared) {
     if (!sharedListWrap || !sharedListBody) return;
 
     if (activeMode !== "shared") {
@@ -1141,11 +1145,11 @@ def inject_graph_interactions(html_path: Path) -> None:
     sharedListWrap.style.display = "block";
     sharedListBody.innerHTML = "";
 
-    if (!keep || keep.size === 0) {
+    if (!allShared || allShared.size === 0) {
       var emptyRow = document.createElement("tr");
       var emptyCell = document.createElement("td");
       emptyCell.colSpan = 2;
-      emptyCell.textContent = "No shared nodes at current threshold.";
+      emptyCell.textContent = "No shared nodes found.";
       emptyCell.style.padding = "6px";
       emptyCell.style.color = "#6b7280";
       emptyCell.style.borderTop = "1px solid #f3f4f6";
@@ -1154,29 +1158,32 @@ def inject_graph_interactions(html_path: Path) -> None:
       return;
     }
 
-    var names = Array.from(keep).map(function (id) {
+    var rows = Array.from(allShared).map(function (id) {
       var n = allNodes[id];
-      if (!n) return String(id);
+      if (!n) return { id: id, name: String(id) };
       var full = (n.title || n.label || String(id));
-      return String(full);
+      return { id: id, name: String(full) };
     }).sort(function (a, b) {
-      return a.localeCompare(b);
+      return a.name.localeCompare(b.name);
     });
 
-    for (var i = 0; i < names.length; i++) {
+    for (var i = 0; i < rows.length; i++) {
+      var isVisible = !!(visibleShared && visibleShared.has(rows[i].id));
       var tr = document.createElement("tr");
       var c1 = document.createElement("td");
       c1.textContent = String(i + 1);
       c1.style.padding = "4px 6px";
       c1.style.borderTop = "1px solid #f3f4f6";
       c1.style.verticalAlign = "top";
+      c1.style.fontWeight = isVisible ? "700" : "400";
 
       var c2 = document.createElement("td");
-      c2.textContent = names[i];
+      c2.textContent = rows[i].name;
       c2.style.padding = "4px 6px";
       c2.style.borderTop = "1px solid #f3f4f6";
       c2.style.verticalAlign = "top";
       c2.style.wordBreak = "break-word";
+      c2.style.fontWeight = isVisible ? "700" : "400";
 
       tr.appendChild(c1);
       tr.appendChild(c2);
@@ -1186,8 +1193,12 @@ def inject_graph_interactions(html_path: Path) -> None:
 
   function applyView() {
     var keep = null;
+    var allShared = null;
+    var visibleShared = null;
     if (activeMode === "shared") {
-      keep = sharedNodeSet();
+      keep = sharedNodeSet(true);
+      allShared = sharedNodeSet(false);
+      visibleShared = keep;
     } else if (activeMode === "focus") {
       keep = focusedNodeSet(activeNode);
     }
@@ -1254,7 +1265,7 @@ def inject_graph_interactions(html_path: Path) -> None:
 
     nodes.update(nodeUpdates);
     edges.update(edgeUpdates);
-    updateSharedList(keep);
+    updateSharedList(allShared, visibleShared);
   }
 
   createSliderUi();
