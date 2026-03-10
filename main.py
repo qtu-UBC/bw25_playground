@@ -30,6 +30,7 @@ import glob
 import zipfile
 from datetime import datetime
 import traceback
+from html import escape
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Any, Set
 
@@ -749,14 +750,60 @@ def export_graph_html(G: nx.DiGraph, out_path: Path, title: str) -> None:
             return "n/a"
         return f"{v:.6g}"
 
+    def extract_unspsc_code(act: Any) -> str:
+        explicit = as_text(act.get("unspsc") or act.get("unspsc_code"))
+        if explicit:
+            return explicit
+        classifications = act.get("classifications") or []
+        for item in classifications:
+            if isinstance(item, (tuple, list)) and len(item) >= 2:
+                if str(item[0]).strip().lower() == "unspsc":
+                    return as_text(item[1]) or "unknown"
+        return "unknown"
+
+    def node_semantics(key: Any, full_label: str, kind: str) -> Tuple[str, str]:
+        if not isinstance(key, tuple) or key[0] == "__model__" or kind == "root":
+            process_type = f"{full_label} (UNSPSC n/a)"
+            process_instance = f"{process_type} | model aggregate, current run, unspecified time range"
+            return process_type, process_instance
+
+        try:
+            act = bd.get_activity(key)
+        except Exception:
+            process_type = f"{full_label} (UNSPSC unknown)"
+            process_instance = f"{process_type} | unknown organization, unknown site, unspecified time range"
+            return process_type, process_instance
+
+        unspsc = extract_unspsc_code(act)
+        descriptor = as_text(act.get("name"), default=full_label)
+        process_type = f"{descriptor} (UNSPSC {unspsc})"
+
+        firm = as_text(act.get("source") or act.get("company") or act.get("author"), default="unspecified organization")
+        site = as_text(act.get("location"), default="unspecified site")
+        time_range = as_text(
+            act.get("time range")
+            or act.get("validity")
+            or act.get("year")
+            or act.get("temporal scope"),
+            default="unspecified time range",
+        )
+        process_instance = f"{process_type} | {firm}, {site}, {time_range}"
+        return process_type, process_instance
+
     for key, attrs in G.nodes(data=True):
         full = attrs.get("label") or f"{key[0]}::{key[1]}"
         kind = attrs.get("kind", "node")
         shape = "box" if kind in {"foreground", "root"} else "ellipse"
+        node_type, node_instance = node_semantics(key, full, kind)
+        tooltip = (
+            f"<b>Name:</b> {escape(full)}<br>"
+            f"<b>Node type:</b> {escape(node_type)}<br>"
+            f"<b>Node instance:</b> {escape(node_instance)}"
+        )
         net.add_node(
             str(key),
             label=shorten(full),
-            title=full,   # full label on hover
+            title=tooltip,
             shape=shape,
         )
 
