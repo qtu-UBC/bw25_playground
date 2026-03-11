@@ -25,12 +25,12 @@ Notes:
 from __future__ import annotations
 
 import os
+import sys
 import re
 import glob
 import zipfile
 from datetime import datetime
 import traceback
-from html import escape
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Any, Set
 
@@ -77,6 +77,11 @@ ERROR_LOG = LOGS_DIR / "errors.log"
 GRAPH_MAX_NODES = 250          # hard cap for readability
 GRAPH_MAX_DEPTH = 6            # traverse technosphere inputs up to this depth
 INCLUDE_BACKGROUND_NODES = True  # include matched ecoinvent nodes as leaves (no further expansion)
+
+# Cumulative node-impact modes
+CUMULATIVE_MODE_NONE = "none"
+CUMULATIVE_MODE_FOREGROUND_ROOT = "foreground_root"
+CUMULATIVE_MODE_ALL = "all"
 
 
 # ---------------------------
@@ -750,6 +755,12 @@ def export_graph_html(G: nx.DiGraph, out_path: Path, title: str) -> None:
             return "n/a"
         return f"{v:.6g}"
 
+    def clip_text(s: str, max_len: int = 120) -> str:
+        s = " ".join((s or "").split())
+        if len(s) <= max_len:
+            return s
+        return s[: max_len - 1] + "…"
+
     def extract_unspsc_code(act: Any) -> str:
         explicit = as_text(act.get("unspsc") or act.get("unspsc_code"))
         if explicit:
@@ -795,10 +806,25 @@ def export_graph_html(G: nx.DiGraph, out_path: Path, title: str) -> None:
         kind = attrs.get("kind", "node")
         shape = "box" if kind in {"foreground", "root"} else "ellipse"
         node_type, node_instance = node_semantics(key, full, kind)
+        node_impact_direct = attrs.get("node_impact_direct")
+        node_impact_cumulative = attrs.get("node_impact_cumulative")
+        impact_scope_direct = attrs.get(
+            "impact_scope_direct",
+            "Direct/onsite process contribution, analogous to gate-to-gate emissions, "
+            "embedded in the full cradle-to-gate system calculation.",
+        )
+        impact_scope_cumulative = attrs.get(
+            "impact_scope_cumulative",
+            "Upstream-inclusive contribution for this node in the current functional-unit context.",
+        )
         tooltip = (
-            f"<b>Name:</b> {escape(full)}<br>"
-            f"<b>Node type:</b> {escape(node_type)}<br>"
-            f"<b>Node instance:</b> {escape(node_instance)}"
+            f"Name: {clip_text(full, 90)}\n"
+            f"Node type: {clip_text(node_type, 110)}\n"
+            f"Node instance: {clip_text(node_instance, 130)}\n"
+            f"Node impact (direct): {fmt(node_impact_direct)}\n"
+            f"Node impact (cumulative): {fmt(node_impact_cumulative)}\n"
+            f"Impact scope (direct): {clip_text(impact_scope_direct, 130)}\n"
+            f"Impact scope (cumulative): {clip_text(impact_scope_cumulative, 130)}"
         )
         net.add_node(
             str(key),
@@ -1339,7 +1365,13 @@ def inject_graph_interactions(html_path: Path) -> None:
     html_path.write_text(html, encoding="utf-8")
 
 
-def run_lcia_and_graph(root_acts, root_names: List[str], source_tag: str, methods: List[Tuple[str, str, str]]) -> None:
+def run_lcia_and_graph(
+    root_acts,
+    root_names: List[str],
+    source_tag: str,
+    methods: List[Tuple[str, str, str]],
+    cumulative_node_mode: str,
+) -> None:
     demand = {act: float(ROOT_ACTIVITY_AMOUNT) for act in root_acts}
     graph_root_keys = [act.key for act in root_acts]
     for method in methods:
@@ -1350,7 +1382,12 @@ def run_lcia_and_graph(root_acts, root_names: List[str], source_tag: str, method
 
         # Graph (model-level)
         G = build_model_graph_from_foreground(graph_root_keys, depth=GRAPH_MAX_DEPTH)
-        annotate_graph_with_edge_impacts(G, lca)
+        annotate_graph_with_impacts(
+            G,
+            lca,
+            method,
+            cumulative_node_mode=cumulative_node_mode,
+        )
 
         safe_method = "__".join([slugify(x) for x in method])
         safe_root = "multi_root" if len(root_names) > 1 else slugify(root_names[0])
@@ -1362,14 +1399,28 @@ def run_lcia_and_graph(root_acts, root_names: List[str], source_tag: str, method
         print(f"     ✓ {method} score={score:g} -> {out_html}")
 
 
-def annotate_graph_with_edge_impacts(G: nx.DiGraph, lca: bc.LCA) -> None:
+def annotate_graph_with_impacts(
+    G: nx.DiGraph,
+    lca: bc.LCA,
+    method: Tuple[str, str, str],
+    cumulative_node_mode: str,
+) -> None:
     """
-    Add a simple edge-level impact contribution estimate to graph edges.
+    Add node- and edge-level impact metrics to graph attributes.
 
-    Approach:
-    1) Compute direct characterized impact per activity from characterized inventory columns.
-    2) Allocate each input activity's direct impact to outgoing graph edges in proportion to
-       (exchange amount * consumer supply) / producer supply.
+    Calculations:
+    - Node impact (direct):
+      direct_i = sum(characterized_inventory[:, i])
+      This is the process-column contribution for activity i at solved scale.
+
+    - Node impact (cumulative, optional by user mode):
+      cumulative_i = score({i: 1.0}) * supply_i
+      where supply_i is the solved amount of activity i in the current FU result.
+      This includes upstream requirements for node i (scaled to current FU context).
+
+    - Edge impact (u -> v):
+      edge(u,v) = direct_u * ((amount_uv * supply_v) / supply_u)
+      i.e., allocate source node u's direct impact to outgoing edges by required share.
     """
     try:
         by_activity = np.asarray(lca.characterized_inventory.sum(axis=0)).ravel()
@@ -1383,6 +1434,7 @@ def annotate_graph_with_edge_impacts(G: nx.DiGraph, lca: bc.LCA) -> None:
     activity_index = lca.dicts.activity
     direct_by_key: Dict[Tuple[str, str], float] = {}
     supply_by_key: Dict[Tuple[str, str], float] = {}
+    cumulative_by_key: Dict[Tuple[str, str], float] = {}
 
     for node in G.nodes:
         if not isinstance(node, tuple) or node[0] == "__model__":
@@ -1394,6 +1446,68 @@ def annotate_graph_with_edge_impacts(G: nx.DiGraph, lca: bc.LCA) -> None:
             supply_by_key[node] = abs(float(supply[idx]))
         except Exception:
             continue
+
+    mode = (cumulative_node_mode or CUMULATIVE_MODE_NONE).strip().lower()
+    if mode not in {CUMULATIVE_MODE_NONE, CUMULATIVE_MODE_FOREGROUND_ROOT, CUMULATIVE_MODE_ALL}:
+        mode = CUMULATIVE_MODE_NONE
+
+    candidate_nodes: List[Tuple[str, str]] = []
+    if mode != CUMULATIVE_MODE_NONE:
+        for node, attrs in G.nodes(data=True):
+            if not isinstance(node, tuple) or node[0] == "__model__":
+                continue
+            if node not in supply_by_key:
+                continue
+            kind = str(attrs.get("kind") or "").strip().lower()
+            if mode == CUMULATIVE_MODE_FOREGROUND_ROOT and kind not in {"foreground", "root"}:
+                continue
+            candidate_nodes.append(node)
+
+    if candidate_nodes:
+        # Cumulative node impacts are expensive (one unit-demand LCA per node), so cache by node key.
+        # We scale each node's unit score by its solved supply amount in the current FU result.
+        unit_score_cache: Dict[Tuple[str, str], float] = {}
+        for node in candidate_nodes:
+            try:
+                act = bd.get_activity(node)
+                if node not in unit_score_cache:
+                    unit_lca = bc.LCA({act: 1.0}, method)
+                    unit_lca.lci()
+                    unit_lca.lcia()
+                    unit_score_cache[node] = float(unit_lca.score)
+                # Use signed supply to preserve any sign conventions in solved amounts.
+                act_idx = activity_index[act.id]
+                solved_supply_signed = float(supply[act_idx])
+                cumulative_by_key[node] = unit_score_cache[node] * solved_supply_signed
+            except Exception:
+                continue
+
+    for node in G.nodes:
+        if isinstance(node, tuple) and node[0] != "__model__":
+            kind = str(G.nodes[node].get("kind") or "").strip().lower()
+            G.nodes[node]["node_impact_direct"] = direct_by_key.get(node)
+            G.nodes[node]["node_impact_cumulative"] = cumulative_by_key.get(node)
+            G.nodes[node]["impact_scope_direct"] = (
+                "Direct/onsite process contribution, analogous to gate-to-gate emissions, "
+                "embedded in the full cradle-to-gate system calculation."
+            )
+            if mode == CUMULATIVE_MODE_NONE:
+                G.nodes[node]["impact_scope_cumulative"] = (
+                    "Not calculated (user selected no cumulative node-level impacts to reduce runtime)."
+                )
+            elif mode == CUMULATIVE_MODE_FOREGROUND_ROOT and kind not in {"foreground", "root"}:
+                G.nodes[node]["impact_scope_cumulative"] = (
+                    "Not calculated for this node (mode is foreground/root cumulative only)."
+                )
+            else:
+                G.nodes[node]["impact_scope_cumulative"] = (
+                    "Upstream-inclusive contribution for this node in the current functional-unit context."
+                )
+        else:
+            G.nodes[node]["node_impact_direct"] = None
+            G.nodes[node]["node_impact_cumulative"] = None
+            G.nodes[node]["impact_scope_direct"] = "Model/root helper node."
+            G.nodes[node]["impact_scope_cumulative"] = "Model/root helper node."
 
     for u, v, attrs in G.edges(data=True):
         if not (isinstance(u, tuple) and isinstance(v, tuple)):
@@ -1483,6 +1597,58 @@ def validate_lcia_ready(demand: Dict[Any, float], methods: List[Tuple[str, str, 
     )
 
 
+def prompt_cumulative_node_mode() -> str:
+    """
+    Ask whether to compute cumulative node-level impacts, and at what coverage.
+    These require one additional unit-demand LCIA per selected node and can increase runtime.
+    """
+    mode_env = os.environ.get("BW25_CUMULATIVE_NODE_IMPACTS_MODE", "").strip().lower()
+    env_aliases = {
+        "none": CUMULATIVE_MODE_NONE,
+        "off": CUMULATIVE_MODE_NONE,
+        "0": CUMULATIVE_MODE_NONE,
+        "foreground_root": CUMULATIVE_MODE_FOREGROUND_ROOT,
+        "foreground": CUMULATIVE_MODE_FOREGROUND_ROOT,
+        "fg_root": CUMULATIVE_MODE_FOREGROUND_ROOT,
+        "2": CUMULATIVE_MODE_FOREGROUND_ROOT,
+        "all": CUMULATIVE_MODE_ALL,
+        "on": CUMULATIVE_MODE_ALL,
+        "1": CUMULATIVE_MODE_ALL,
+        "3": CUMULATIVE_MODE_ALL,
+    }
+    if mode_env in env_aliases:
+        selected = env_aliases[mode_env]
+        print("     ✓ Cumulative node-level impact mode set via BW25_CUMULATIVE_NODE_IMPACTS_MODE.")
+        return selected
+
+    # Backward compatibility with previous boolean env flag.
+    legacy_env = os.environ.get("BW25_CUMULATIVE_NODE_IMPACTS", "").strip().lower()
+    if legacy_env in {"1", "true", "yes", "y"}:
+        print("     ✓ Cumulative node-level impact mode set to ALL via BW25_CUMULATIVE_NODE_IMPACTS.")
+        return CUMULATIVE_MODE_ALL
+    if legacy_env in {"0", "false", "no", "n"}:
+        print("     ✓ Cumulative node-level impact mode set to NONE via BW25_CUMULATIVE_NODE_IMPACTS.")
+        return CUMULATIVE_MODE_NONE
+
+    if not sys.stdin.isatty():
+        print(
+            "     ! Non-interactive run detected; using foreground/root cumulative mode by default "
+            "(set BW25_CUMULATIVE_NODE_IMPACTS_MODE to override)."
+        )
+        return CUMULATIVE_MODE_FOREGROUND_ROOT
+
+    print(
+        "     ? Cumulative node-level impacts can significantly increase runtime on large models.\n"
+        "       Choose mode: [1] none, [2] foreground/root only (recommended), [3] all graph nodes"
+    )
+    answer = input("       > ").strip().lower()
+    if answer in {"3", "all", "a"}:
+        return CUMULATIVE_MODE_ALL
+    if answer in {"1", "none", "n", "no"}:
+        return CUMULATIVE_MODE_NONE
+    return CUMULATIVE_MODE_FOREGROUND_ROOT
+
+
 # ---------------------------
 # Main
 # ---------------------------
@@ -1506,6 +1672,7 @@ def main() -> None:
     methods = load_methods_from_csv(METHODS_CSV)
     # Optional quick datapackage sanity check for the first method
     sanity_check_method_datapackages(methods[0])
+    cumulative_node_mode = prompt_cumulative_node_mode()
 
     print("[4/5] Build DBs + run LCIA/graphs for each file")
     log_biosphere_skip("=== New run started ===")
@@ -1537,7 +1704,13 @@ def main() -> None:
         root_acts = [get_activity_by_name(FOREGROUND_DB, name) for name in root_names]
         demand = {act: float(ROOT_ACTIVITY_AMOUNT) for act in root_acts}
         validate_lcia_ready(demand, methods)
-        run_lcia_and_graph(root_acts, root_names=root_names, source_tag=source_tag, methods=methods)
+        run_lcia_and_graph(
+            root_acts,
+            root_names=root_names,
+            source_tag=source_tag,
+            methods=methods,
+            cumulative_node_mode=cumulative_node_mode,
+        )
 
     print("[5/5] Done")
     print(f"     ✓ Graphs saved to: {GRAPHS_DIR}/")
