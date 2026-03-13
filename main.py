@@ -27,6 +27,8 @@ from __future__ import annotations
 import os
 import sys
 import re
+import hashlib
+import json
 import glob
 import zipfile
 from datetime import datetime
@@ -94,6 +96,20 @@ def slugify(s: str) -> str:
     s = re.sub(r"[\s]+", "_", s)
     s = re.sub(r"_+", "_", s).strip("_")
     return s or "item"
+
+
+def stable_activity_code(name: str, location: str = "", reference_product: str = "") -> str:
+    """
+    Stable code using content-based hashing so IDs remain deterministic across versions.
+    Hash input: activity name + location + reference product (normalized).
+    """
+    norm_name = " ".join((name or "").strip().lower().split())
+    norm_location = " ".join((location or "").strip().lower().split())
+    norm_ref_product = " ".join((reference_product or "").strip().lower().split())
+    payload = f"{norm_name}|{norm_location}|{norm_ref_product}"
+    digest = hashlib.sha1(payload.encode("utf-8")).hexdigest()[:12]
+    prefix = slugify(name)[:48]
+    return f"{prefix}__{digest}"
 
 
 def as_text(value: Any, default: str = "") -> str:
@@ -378,22 +394,30 @@ def build_foreground_and_external(
       - FOREGROUND_DB: Activity blocks in sheet
       - EXTERNAL_DB: stub activities for unmatched technosphere inputs
     """
-    fg_codes = {slugify(name): name for name in activities.keys()}
+    fg_name_to_code: Dict[str, str] = {}
+    for name, meta in activities.items():
+        fg_name_to_code[name] = stable_activity_code(
+            name=name,
+            location=as_text(meta.get("location"), default="GLO"),
+            reference_product=as_text(meta.get("reference_product"), default=name),
+        )
 
     fg_data: Dict[Tuple[str, str], Dict[str, Any]] = {}
     ext_data: Dict[Tuple[str, str], Dict[str, Any]] = {}
 
     # Create foreground datasets
     for name, meta in activities.items():
-        code = slugify(name)
+        code = fg_name_to_code[name]
+        location = as_text(meta.get("location"), default="GLO")
+        reference_product = as_text(meta.get("reference_product"), default=name)
         key = (FOREGROUND_DB, code)
         fg_data[key] = {
             "name": name,
             "code": code,
             "database": FOREGROUND_DB,
-            "location": meta.get("location") or "GLO",
+            "location": location,
             "unit": meta.get("unit") or "unit",
-            "reference product": meta.get("reference_product") or name,
+            "reference product": reference_product,
             "comment": as_text(meta.get("comment")),
             "exchanges": [
                 {
@@ -406,8 +430,15 @@ def build_foreground_and_external(
             ],
         }
 
-    def ensure_external(name: str, unit: str = "unit") -> Tuple[str, str]:
-        code = slugify(name)
+    def ensure_external(
+        name: str,
+        unit: str = "unit",
+        location: str = "GLO",
+        reference_product: Optional[str] = None,
+    ) -> Tuple[str, str]:
+        ref_product = reference_product or name
+        loc = location or "GLO"
+        code = stable_activity_code(name=name, location=loc, reference_product=ref_product)
         key = (EXTERNAL_DB, code)
         if key in ext_data:
             return key
@@ -415,9 +446,9 @@ def build_foreground_and_external(
             "name": name,
             "code": code,
             "database": EXTERNAL_DB,
-            "location": "GLO",
+            "location": loc,
             "unit": unit or "unit",
-            "reference product": name,
+            "reference product": ref_product,
             "exchanges": [
                 {"input": key, "output": key, "amount": 1.0, "type": "production", "unit": unit or "unit"}
             ],
@@ -426,7 +457,9 @@ def build_foreground_and_external(
 
     # Add exchanges to foreground datasets
     for ex in exchanges:
-        out_key = (FOREGROUND_DB, slugify(ex["output_name"]))
+        output_name = as_text(ex.get("output_name"))
+        out_code = fg_name_to_code.get(output_name) or stable_activity_code(output_name, "GLO", output_name)
+        out_key = (FOREGROUND_DB, out_code)
         ex_type = str(ex.get("type") or "").strip().lower()
         in_name = str(ex.get("input_name") or "").strip()
         amount = float(ex.get("amount") or 0.0)
@@ -452,11 +485,9 @@ def build_foreground_and_external(
                 continue
 
         elif ex_type == "technosphere":
-            in_code = slugify(in_name)
-
             # If it is one of our foreground activities, link internally
-            if in_code in fg_codes:
-                input_key = (FOREGROUND_DB, in_code)
+            if in_name in fg_name_to_code:
+                input_key = (FOREGROUND_DB, fg_name_to_code[in_name])
             else:
                 # Try background match first if ecoinvent index is available
                 input_key = None
@@ -475,22 +506,32 @@ def build_foreground_and_external(
 
                 # If no match, create external stub
                 if input_key is None:
-                    input_key = ensure_external(in_name, unit=unit)
+                    input_key = ensure_external(
+                        in_name,
+                        unit=unit,
+                        location=(ex.get("location") or "GLO"),
+                        reference_product=(ex.get("reference_product") or in_name),
+                    )
 
         else:
             # default: treat as technosphere
-            input_key = ensure_external(in_name, unit=unit)
+            input_key = ensure_external(
+                in_name,
+                unit=unit,
+                location=(ex.get("location") or "GLO"),
+                reference_product=(ex.get("reference_product") or in_name),
+            )
 
         # Append exchange
         if out_key not in fg_data:
             # should not happen, but avoid crash
             fg_data[out_key] = {
-                "name": ex["output_name"],
+                "name": output_name,
                 "code": out_key[1],
                 "database": FOREGROUND_DB,
                 "location": "GLO",
                 "unit": "unit",
-                "reference product": ex["output_name"],
+                "reference product": output_name,
                 "exchanges": [{"input": out_key, "output": out_key, "amount": 1.0, "type": "production", "unit": "unit"}],
             }
 
@@ -641,7 +682,12 @@ def get_activity_by_name(db_name: str, name: str) -> bd.backends.peewee.Activity
     matches = [a for a in db if a.get("name") == name]
     if matches:
         return matches[0]
-    # fallback by slugified code
+    # fallback by deterministic code (default metadata assumptions)
+    code = stable_activity_code(name=name, location="GLO", reference_product=name)
+    matches = [a for a in db if a.get("code") == code]
+    if matches:
+        return matches[0]
+    # backward-compatible fallback by legacy slugified code
     code = slugify(name)
     matches = [a for a in db if a.get("code") == code]
     if matches:
@@ -755,6 +801,11 @@ def export_graph_html(G: nx.DiGraph, out_path: Path, title: str) -> None:
             return "n/a"
         return f"{v:.6g}"
 
+    def fmt_pct(v: Optional[float]) -> str:
+        if v is None:
+            return "n/a"
+        return f"{v:.3f}%"
+
     def clip_text(s: str, max_len: int = 120) -> str:
         s = " ".join((s or "").split())
         if len(s) <= max_len:
@@ -808,6 +859,7 @@ def export_graph_html(G: nx.DiGraph, out_path: Path, title: str) -> None:
         node_type, node_instance = node_semantics(key, full, kind)
         node_impact_direct = attrs.get("node_impact_direct")
         node_impact_cumulative = attrs.get("node_impact_cumulative")
+        node_direct_pct_total = attrs.get("node_direct_impact_pct_total")
         impact_scope_direct = attrs.get(
             "impact_scope_direct",
             "Direct/onsite process contribution, analogous to gate-to-gate emissions, "
@@ -822,6 +874,7 @@ def export_graph_html(G: nx.DiGraph, out_path: Path, title: str) -> None:
             f"Node type: {clip_text(node_type, 110)}\n"
             f"Node instance: {clip_text(node_instance, 130)}\n"
             f"Node impact (direct): {fmt(node_impact_direct)}\n"
+            f"Direct impact share of total graph: {fmt_pct(node_direct_pct_total)}\n"
             f"Node impact (cumulative): {fmt(node_impact_cumulative)}\n"
             f"Impact scope (direct): {clip_text(impact_scope_direct, 130)}\n"
             f"Impact scope (cumulative): {clip_text(impact_scope_cumulative, 130)}"
@@ -850,10 +903,10 @@ def export_graph_html(G: nx.DiGraph, out_path: Path, title: str) -> None:
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     net.write_html(str(out_path), open_browser=False, notebook=False)
-    inject_graph_interactions(out_path)
+    inject_graph_interactions(out_path, all_node_direct_rows=G.graph.get("all_node_direct_rows"))
 
 
-def inject_graph_interactions(html_path: Path) -> None:
+def inject_graph_interactions(html_path: Path, all_node_direct_rows: Optional[List[Dict[str, Any]]] = None) -> None:
     """Add click-to-focus behavior in exported vis.js HTML graphs."""
     if not html_path.exists():
         return
@@ -895,6 +948,7 @@ def inject_graph_interactions(html_path: Path) -> None:
 
   var allNodes = {};
   var allEdges = {};
+  var ALL_NODE_DIRECT_ROWS = __ALL_NODE_DIRECT_ROWS_JSON__;
   nodes.get().forEach(function (n) { allNodes[n.id] = n; });
   edges.get().forEach(function (e) { allEdges[e.id] = e; });
 
@@ -918,6 +972,9 @@ def inject_graph_interactions(html_path: Path) -> None:
   var edgeValueMode = "exchange"; // exchange | impact
   var sharedListWrap = null;
   var sharedListBody = null;
+  var directTableWrap = null;
+  var directTableBody = null;
+  var directTableToggle = null;
 
   function createSliderUi() {
     var box = document.createElement("div");
@@ -1064,6 +1121,27 @@ def inject_graph_interactions(html_path: Path) -> None:
     });
     modeWrap.appendChild(modeSelect);
     actionRow.appendChild(modeWrap);
+
+    directTableToggle = document.createElement("button");
+    directTableToggle.type = "button";
+    directTableToggle.textContent = "Show All-Node Direct Impacts";
+    directTableToggle.style.padding = "6px 8px";
+    directTableToggle.style.border = "1px solid #9ca3af";
+    directTableToggle.style.borderRadius = "6px";
+    directTableToggle.style.background = "#f9fafb";
+    directTableToggle.style.cursor = "pointer";
+    directTableToggle.addEventListener("click", function () {
+      var showing = directTableWrap && directTableWrap.style.display !== "none";
+      if (showing) {
+        directTableWrap.style.display = "none";
+        directTableToggle.textContent = "Show All-Node Direct Impacts";
+      } else {
+        directTableWrap.style.display = "block";
+        directTableToggle.textContent = "Hide All-Node Direct Impacts";
+        renderDirectImpactTable();
+      }
+    });
+    actionRow.appendChild(directTableToggle);
     box.appendChild(actionRow);
 
     sharedListWrap = document.createElement("div");
@@ -1113,6 +1191,61 @@ def inject_graph_interactions(html_path: Path) -> None:
     tableWrap.appendChild(table);
     sharedListWrap.appendChild(tableWrap);
     box.appendChild(sharedListWrap);
+
+    directTableWrap = document.createElement("div");
+    directTableWrap.style.marginTop = "8px";
+    directTableWrap.style.display = "none";
+
+    var directTitle = document.createElement("div");
+    directTitle.textContent = "All Nodes (Direct Impact, ranked)";
+    directTitle.style.fontWeight = "600";
+    directTitle.style.marginBottom = "4px";
+    directTableWrap.appendChild(directTitle);
+
+    var directHint = document.createElement("div");
+    directHint.textContent = "Top 10 solved activities by absolute % of total; bold rows are currently in the visible graph.";
+    directHint.style.color = "#4b5563";
+    directHint.style.marginBottom = "4px";
+    directTableWrap.appendChild(directHint);
+
+    var directTableScroll = document.createElement("div");
+    directTableScroll.style.maxHeight = "230px";
+    directTableScroll.style.overflowY = "auto";
+    directTableScroll.style.border = "1px solid #e5e7eb";
+    directTableScroll.style.borderRadius = "6px";
+
+    var directTable = document.createElement("table");
+    directTable.style.width = "100%";
+    directTable.style.borderCollapse = "collapse";
+    directTable.style.fontSize = "11px";
+
+    var directHead = document.createElement("thead");
+    var dhr = document.createElement("tr");
+    var dh1 = document.createElement("th");
+    dh1.textContent = "#";
+    var dh2 = document.createElement("th");
+    dh2.textContent = "Name";
+    var dh3 = document.createElement("th");
+    dh3.textContent = "DB";
+    var dh4 = document.createElement("th");
+    dh4.textContent = "Direct";
+    var dh5 = document.createElement("th");
+    dh5.textContent = "% of total";
+    [dh1, dh2, dh3, dh4, dh5].forEach(function (h) {
+      h.style.textAlign = "left";
+      h.style.padding = "4px 6px";
+      h.style.position = "sticky";
+      h.style.top = "0";
+      h.style.background = "#f9fafb";
+      dhr.appendChild(h);
+    });
+    directHead.appendChild(dhr);
+    directTable.appendChild(directHead);
+    directTableBody = document.createElement("tbody");
+    directTable.appendChild(directTableBody);
+    directTableScroll.appendChild(directTable);
+    directTableWrap.appendChild(directTableScroll);
+    box.appendChild(directTableWrap);
 
     var help = document.createElement("div");
     help.style.marginTop = "6px";
@@ -1264,6 +1397,61 @@ def inject_graph_interactions(html_path: Path) -> None:
     }
   }
 
+  function formatImpact(v) {
+    var x = parseFloat(v);
+    if (isNaN(x)) return "n/a";
+    return x.toPrecision(6);
+  }
+
+  function formatPct(v) {
+    var x = parseFloat(v);
+    if (isNaN(x)) return "n/a";
+    return x.toFixed(3) + "%";
+  }
+
+  function renderDirectImpactTable() {
+    if (!directTableBody) return;
+    directTableBody.innerHTML = "";
+
+    var rows = (ALL_NODE_DIRECT_ROWS || []).slice(0, 10);
+    if (rows.length === 0) {
+      var emptyRow = document.createElement("tr");
+      var emptyCell = document.createElement("td");
+      emptyCell.colSpan = 5;
+      emptyCell.textContent = "No node impact rows available.";
+      emptyCell.style.padding = "6px";
+      emptyCell.style.color = "#6b7280";
+      emptyCell.style.borderTop = "1px solid #f3f4f6";
+      emptyRow.appendChild(emptyCell);
+      directTableBody.appendChild(emptyRow);
+      return;
+    }
+
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i] || {};
+      var tr = document.createElement("tr");
+
+      function makeCell(text, bold) {
+        var td = document.createElement("td");
+        td.textContent = text;
+        td.style.padding = "4px 6px";
+        td.style.borderTop = "1px solid #f3f4f6";
+        td.style.verticalAlign = "top";
+        td.style.wordBreak = "break-word";
+        td.style.fontWeight = bold ? "700" : "400";
+        return td;
+      }
+
+      var shown = !!r.shown_in_graph;
+      tr.appendChild(makeCell(String(i + 1), shown));
+      tr.appendChild(makeCell(String(r.name || ""), shown));
+      tr.appendChild(makeCell(String(r.database || ""), shown));
+      tr.appendChild(makeCell(formatImpact(r.direct_impact), shown));
+      tr.appendChild(makeCell(formatPct(r.direct_pct_total), shown));
+      directTableBody.appendChild(tr);
+    }
+  }
+
   function applyView() {
     var keep = null;
     var allShared = null;
@@ -1360,7 +1548,7 @@ def inject_graph_interactions(html_path: Path) -> None:
 })();
 </script>
 """
-
+    script = script.replace("__ALL_NODE_DIRECT_ROWS_JSON__", json.dumps(all_node_direct_rows or []))
     html = html.replace(marker, script + "\n" + marker)
     html_path.write_text(html, encoding="utf-8")
 
@@ -1431,10 +1619,14 @@ def annotate_graph_with_impacts(
     if by_activity.size == 0 or supply.size == 0:
         return
 
+    graph_total_impact = float(lca.score)
+    G.graph["total_impact"] = graph_total_impact
+
     activity_index = lca.dicts.activity
     direct_by_key: Dict[Tuple[str, str], float] = {}
     supply_by_key: Dict[Tuple[str, str], float] = {}
     cumulative_by_key: Dict[Tuple[str, str], float] = {}
+    all_node_direct_rows: List[Dict[str, Any]] = []
 
     for node in G.nodes:
         if not isinstance(node, tuple) or node[0] == "__model__":
@@ -1446,6 +1638,44 @@ def annotate_graph_with_impacts(
             supply_by_key[node] = abs(float(supply[idx]))
         except Exception:
             continue
+
+    graph_node_keys = {k for k in G.nodes if isinstance(k, tuple)}
+    for act_id, idx in activity_index.items():
+        try:
+            direct_val = float(by_activity[idx])
+        except Exception:
+            continue
+
+        try:
+            act = bd.get_node(id=act_id)
+        except Exception:
+            act = None
+
+        key = getattr(act, "key", None) if act is not None else None
+        shown_in_graph = bool(key in graph_node_keys) if isinstance(key, tuple) else False
+        name = as_text(getattr(act, "get")("name"), default=str(act_id)) if act is not None else str(act_id)
+        db_name = key[0] if isinstance(key, tuple) and len(key) == 2 else ""
+        location = as_text(getattr(act, "get")("location"), default="") if act is not None else ""
+        ref_product = as_text(getattr(act, "get")("reference product"), default="") if act is not None else ""
+        pct = (direct_val / graph_total_impact) * 100.0 if abs(graph_total_impact) > 0 else None
+
+        all_node_direct_rows.append(
+            {
+                "name": name,
+                "database": db_name,
+                "location": location,
+                "reference_product": ref_product,
+                "direct_impact": direct_val,
+                "direct_pct_total": pct,
+                "shown_in_graph": shown_in_graph,
+            }
+        )
+
+    all_node_direct_rows.sort(
+        key=lambda r: abs(float(r.get("direct_pct_total") or 0.0)),
+        reverse=True,
+    )
+    G.graph["all_node_direct_rows"] = all_node_direct_rows
 
     mode = (cumulative_node_mode or CUMULATIVE_MODE_NONE).strip().lower()
     if mode not in {CUMULATIVE_MODE_NONE, CUMULATIVE_MODE_FOREGROUND_ROOT, CUMULATIVE_MODE_ALL}:
@@ -1485,8 +1715,13 @@ def annotate_graph_with_impacts(
     for node in G.nodes:
         if isinstance(node, tuple) and node[0] != "__model__":
             kind = str(G.nodes[node].get("kind") or "").strip().lower()
-            G.nodes[node]["node_impact_direct"] = direct_by_key.get(node)
+            node_direct = direct_by_key.get(node)
+            G.nodes[node]["node_impact_direct"] = node_direct
             G.nodes[node]["node_impact_cumulative"] = cumulative_by_key.get(node)
+            if node_direct is not None and abs(graph_total_impact) > 0:
+                G.nodes[node]["node_direct_impact_pct_total"] = (node_direct / graph_total_impact) * 100.0
+            else:
+                G.nodes[node]["node_direct_impact_pct_total"] = None
             G.nodes[node]["impact_scope_direct"] = (
                 "Direct/onsite process contribution, analogous to gate-to-gate emissions, "
                 "embedded in the full cradle-to-gate system calculation."
@@ -1506,6 +1741,7 @@ def annotate_graph_with_impacts(
         else:
             G.nodes[node]["node_impact_direct"] = None
             G.nodes[node]["node_impact_cumulative"] = None
+            G.nodes[node]["node_direct_impact_pct_total"] = None
             G.nodes[node]["impact_scope_direct"] = "Model/root helper node."
             G.nodes[node]["impact_scope_cumulative"] = "Model/root helper node."
 
